@@ -1,6 +1,5 @@
 <template>
-
-  <div id="themed-app" :data-theme="theme" class="bg-transparent selection:bg-secondary selection:text-secondary-content">
+  <div id="themed-app" :data-theme="theme" class="bg-base-200 selection:bg-secondary selection:text-secondary-content">
     <nav-bar 
       class="z-40" 
       @theme-change="handleThemeChange" 
@@ -10,9 +9,8 @@
     <home-view :isHoveringNavbar="isHoveringNavbar" />
     <footer-bar/>
   </div>
-
-  
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue';
 import NavBar from '../components/NavBar.vue';

@@ -47,18 +47,21 @@
     methods: {
       handleThemeChange() {
         const html = document.getElementById('html')
+        const lightTheme = 'winter' as string;
+        const darkTheme = 'night' as string;
+
         console.log(html)
         if (this.darkMode) {
           if (html) {
-            html.style.backgroundColor = '#FFFFFF';
+            html.style.backgroundColor = '#F0F6FF';
           }
-          this.$emit('theme-change', 'winter')
+          this.$emit('theme-change', lightTheme)
           this.darkMode = false;
         } else {
           if (html) {
-            html.style.backgroundColor = '#0F1729';
+            html.style.backgroundColor = '#05080F';
           }
-          this.$emit('theme-change', 'night')
+          this.$emit('theme-change', darkTheme)
           this.darkMode = true;
         }
       }

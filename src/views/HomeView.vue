@@ -11,7 +11,7 @@
           <div class="h-screen flex items-center justify-center max-w-7xl mx-auto" ref="content">
             <div>
               <div ref="hi">
-                <kinesis-element :strength="5" class="font-extrabold text-5xl py-1 tracking-wider">Hi! 👋 </kinesis-element>
+                <kinesis-element :strength="8" class="font-extrabold text-5xl py-1 tracking-wider">Hi! 👋 </kinesis-element>
               </div>
               <div ref="name">
                 <kinesis-element :strength="2" class="font-extrabold text-5xl py-1 tracking-wider">
@@ -19,47 +19,54 @@
                   <span class="text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-focus">Liam Moore</span>
                 </kinesis-element>
                 <div ref="bio" class="fixed mt-6 ml-24">
-                  <div class="card card-side card-bg border border-secondary w-full p-5">
+                  <div class="flex flex-col p-5 card-bg items-center border border-neutral rounded-lg shadow lg:flex-row lg:max-w-xl z-40">
                     hello
+                    <h5 class="header">TLDR:</h5>
+
                   </div>
                 </div>
               </div>
               <div ref="title">
-                <kinesis-element :strength="5" class="font-extrabold text-5xl tracking-wider">A Fullstack Software Developer</kinesis-element>
+                <kinesis-element :strength="8" class="font-extrabold text-5xl tracking-wider">A Fullstack Software Developer</kinesis-element>
               </div>
             </div>
           </div>
         </div>
       </kinesis-container>
     </div>
-
-    <!-- fixed div for bio -->
-    <!-- <div class="w-full fixed h-screen">
-      <div class="h-screen flex items-center justify-left max-w-7xl mx-24" ref="content">
-        <div ref="bio">
-          <div class="card card-side card-bg border border-primary w-full">
-            hello
-          </div>
-        </div>
-      </div>
-    </div> -->
     
     <!-- NON fixed div for scrolling page content -->
     <div class="h-screen"></div>
-    <div class="project-box z-40 mx-24">
+    <div class="project-box mx-24">
       <div class="max-w-7xl mx-auto grid grid-cols-7" ref="projectList">
         <div class="col-span-4"></div>
-        <div class="col-span-3 space-y-4">
-          <div :strength="5" class="font-extrabold text-5xl py-4 tracking-wider">Projects 💻</div>
-          <project-card 
-            class="col-span-1"
-            name="FFMpeg Video Editor" 
-            description="A video editing toolbox with features such as segment, preview, and thumbnail generation." 
-            :id="1"
-          />
-          <project-card class="col-span-1" name="Another Project" description="This project was very cool because it was super neat teehee" :id="2"/>
-          <project-card class="col-span-1" name="Cool Project" description="This project was very cool because it was super neat teehee" :id="3"/>
-          <project-card class="col-span-1" name="Another Project" description="This project was very cool because it was super neat teehee" :id="4"/>
+        <div class="col-span-3 space-y-16">
+          <div class="space-y-4">
+            <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40">Projects 💻</p>
+            <project-card 
+              class="col-span-1"
+              name="FFMpeg Video Editor" 
+              description="A video editing toolbox with features such as segment, preview, and thumbnail generation." 
+              :id="1"
+            />
+            <project-card class="col-span-1" name="Another Project" description="This project was very cool because it was super neat teehee" :id="2"/>
+            <project-card class="col-span-1" name="Cool Project" description="This project was very cool because it was super neat teehee" :id="3"/>
+            <project-card class="col-span-1" name="Another Project" description="This project was very cool because it was super neat teehee" :id="4"/>
+          
+          </div>
+          <div class="space-y-4">
+            <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40">Education 🎓</p>
+            <project-card 
+              class="col-span-1"
+              name="FFMpeg Video Editor" 
+              description="A video editing toolbox with features such as segment, preview, and thumbnail generation." 
+              :id="1"
+            />
+            <project-card class="col-span-1" name="Another Project" description="This project was very cool because it was super neat teehee" :id="2"/>
+            <project-card class="col-span-1" name="Cool Project" description="This project was very cool because it was super neat teehee" :id="3"/>
+            <project-card class="col-span-1" name="Another Project" description="This project was very cool because it was super neat teehee" :id="4"/>
+          
+          </div>
         </div>
       </div>
     </div>
@@ -95,14 +102,7 @@ export default defineComponent({
   created() {
     window.addEventListener("resize", this.slideName);
   },
-  watch: {
-    // isHoveringProjects(newVal: boolean) {
-    //   if (newVal != this.isHoveringProjects) {
-    //     console.log(newVal);
-    //   }
-    //   this.isHoveringProjects = newVal;
-    // }
-  },
+  watch: {},
   mounted() {
     // Add an event listener to track scroll position
     window.addEventListener('scroll', this.handleScroll);
@@ -221,5 +221,13 @@ export default defineComponent({
 });
 </script>
 <style scoped>
+.card-bg {
+  background: rgba(58,190,247,0);
+  backdrop-filter: blur(10px);
+}
 
+.header-bg {
+  background-color:rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0);
+}
 </style>
