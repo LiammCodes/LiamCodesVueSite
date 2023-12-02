@@ -8,8 +8,7 @@
         <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ name }}</h5>
         <p class="mb-2 font-normal">{{ description }}</p>
         <div class="row space-x-2 mb-2">
-          <div class="badge badge-success">Vue3</div>
-          <div class="badge badge-info">TypeScript</div>
+          <slot name="languageSlot"></slot>
         </div>
       </div>
     </a>
@@ -48,4 +47,8 @@ export default defineComponent({
 });
 </script>
 <style lang="scss">
+.card-bg {
+  background: rgba(58,190,247,0);
+  backdrop-filter: blur(10px);
+}
 </style>

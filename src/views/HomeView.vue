@@ -18,11 +18,12 @@
                   <span ref="im">I'm </span>
                   <span class="text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-focus">Liam Moore</span>
                 </kinesis-element>
-                <div ref="bio" class="fixed mt-6 ml-24">
-                  <div class="flex flex-col p-5 card-bg items-center border border-neutral rounded-lg shadow lg:flex-row lg:max-w-xl z-40">
-                    hello
-                    <h5 class="header">TLDR:</h5>
-
+                <div ref="bio" class="fixed mt-6 ml-20">
+                  <div class="p-5 card-bg items-center border border-neutral rounded-lg shadow lg:flex-row lg:max-w-xl z-40">
+                    <h5 class="font-extrabold text-2xl py-1 tracking-wider">TLDR:</h5>
+                    <p>
+                      Hello this is a brief TLDR about Liam. Blah blah blah, he kinda knows how to code but not really.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -48,8 +49,18 @@
               name="FFMpeg Video Editor" 
               description="A video editing toolbox with features such as segment, preview, and thumbnail generation." 
               :id="1"
-            />
-            <project-card class="col-span-1" name="Another Project" description="This project was very cool because it was super neat teehee" :id="2"/>
+            >
+              <template v-slot:languageSlot>
+                <div class="badge badge-success">Vue3</div>
+                <div class="badge badge-info">TypeScript</div>
+              </template>
+            </project-card>
+            <project-card class="col-span-1" name="Another Project" description="This project was very cool because it was super neat teehee" :id="2">
+              <template v-slot:languageSlot>
+                <div class="badge badge-success">Vue3</div>
+                <div class="badge badge-info">TypeScript</div>
+              </template>
+            </project-card>
             <project-card class="col-span-1" name="Cool Project" description="This project was very cool because it was super neat teehee" :id="3"/>
             <project-card class="col-span-1" name="Another Project" description="This project was very cool because it was super neat teehee" :id="4"/>
           
@@ -174,8 +185,7 @@ export default defineComponent({
       const nameHeader = this.$refs.name as HTMLElement;
 
       if (contentBox && nameHeader) {
-        const distanceToRightEdge = (90 + ((contentBox.clientWidth - nameHeader.clientWidth)/2)) * -1;
-
+        const distanceToRightEdge = (80 + ((contentBox.clientWidth - nameHeader.clientWidth)/2)) * -1;
         gsap.to(this.$refs.name as HTMLElement, {
           scrollTrigger: {
             trigger: '.project-box',
