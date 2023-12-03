@@ -19,8 +19,8 @@
                   <span class="text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-focus">Liam Moore</span>
                 </kinesis-element>
                 <div ref="bio" class="fixed mt-6 ml-20">
-                  <div class="p-5 card-bg items-center border border-neutral rounded-lg shadow lg:flex-row lg:max-w-xl z-40">
-                    <h5 class="font-extrabold text-2xl py-1 tracking-wider">TLDR:</h5>
+                  <div class="px-5 pb-4 pt-2 card-bg items-center border border-neutral rounded-lg shadow lg:flex-row lg:max-w-xl z-40">
+                    <h5 class="font-extrabold text-2xl py-1 tracking-wider text-secondary">TLDR:</h5>
                     <p>
                       Hello this is a brief TLDR about Liam. Blah blah blah, he kinda knows how to code but not really.
                     </p>
@@ -42,31 +42,41 @@
       <div class="max-w-7xl mx-auto grid grid-cols-7" ref="projectList">
         <div class="col-span-4"></div>
         <div class="col-span-3 space-y-16">
+          <!-- project list -->
           <div class="space-y-4">
             <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40">Projects 💻</p>
+            
             <project-card 
               class="col-span-1"
               name="FFMpeg Video Editor" 
               description="A video editing toolbox with features such as segment, preview, and thumbnail generation." 
-              :id="1"
+              img-path="../../assets/images/mcSwissPic.png"
             >
+              <template v-slot:thumbnailSlot>
+                <img class="object-cover w-full h-full rounded" src="../assets/images/mcSwissPic.png" alt="Project Thumbnail">
+              </template>
               <template v-slot:languageSlot>
-                <div class="badge badge-success">Vue3</div>
+                <div class="badge badge-success">Vue 3</div>
                 <div class="badge badge-info">TypeScript</div>
               </template>
             </project-card>
-            <project-card class="col-span-1" name="Another Project" description="This project was very cool because it was super neat teehee" :id="2">
+
+            <project-card 
+              class="col-span-1" 
+              name="Song Request Chat Bot" 
+              description="A chat bot for Twitch that allows the user to queue songs to the streamers Spotify playlist."
+            >
+              <template v-slot:thumbnailSlot>
+                <img class="object-cover w-full h-full rounded" src="../assets/images/mcSwissPic.png" alt="Project Thumbnail">
+              </template>
               <template v-slot:languageSlot>
-                <div class="badge badge-success">Vue3</div>
-                <div class="badge badge-info">TypeScript</div>
+                <div class="badge bg-green-500 text-neutral">Python</div>
               </template>
             </project-card>
-            <project-card class="col-span-1" name="Cool Project" description="This project was very cool because it was super neat teehee" :id="3"/>
-            <project-card class="col-span-1" name="Another Project" description="This project was very cool because it was super neat teehee" :id="4"/>
-          
+
           </div>
           <div class="space-y-4">
-            <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40">Education 🎓</p>
+            <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40 text-secondary">Education 🎓</p>
             <project-card 
               class="col-span-1"
               name="FFMpeg Video Editor" 
@@ -93,7 +103,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import ParticleBackground from '../components/ParticleBackground.vue';
 // @ts-ignore
 import { KinesisContainer, KinesisElement } from 'vue-kinesis';
-import ProjectCard from '../components/ProjectCard.vue';
+import ProjectCard from '../components/cards/ProjectCard.vue';
 
 export default defineComponent({
   name: 'HomeView',
