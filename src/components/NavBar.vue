@@ -17,11 +17,26 @@
           <user-icon class="w-5 h-5"/>          
         </button>
       </div>
-      <label class="swap swap-rotate btn btn-ghost p-3 mr-2">
+
+      
+      <div class="dropdown dropdown-end">
+        <div tabindex="0" role="button" class="btn btn-ghost rounded-btn">Theme</div>
+        <ul tabindex="0" class="menu dropdown-content z-50 p-2 shadow bg-base-100 rounded-box w-52 mt-4">
+          <li><div class="btn btn-sm btn-ghost rounded-btn" @click="handleThemeChange('night')">Night</div></li> 
+          <li><div class="btn btn-sm btn-ghost rounded-btn" @click="handleThemeChange('coffee')">Coffee</div></li> 
+          <li><div class="btn btn-sm btn-ghost rounded-btn" @click="handleThemeChange('synthwave')">Synthwave</div></li> 
+        </ul>
+      </div>
+      
+
+      
+
+
+      <!-- <label class="swap swap-rotate btn btn-ghost p-3 mr-2">
         <input type="checkbox" :checked="true" @change="handleThemeChange"/>
         <sun-icon class="swap-on w-6 h-6"/>
         <moon-icon class="swap-off w-5 h-5"/>
-      </label>
+      </label> -->
     </div>
   </div>
 
@@ -42,27 +57,21 @@
     data() {
       return {
         darkMode: true as boolean,
+        themes: new Map<string, string>([
+          ["night", "#05080F"],
+          ["coffee", "#0C080C"],
+          ["synthwave", "#0E0920"]
+        ]),
       }
     },
     methods: {
-      handleThemeChange() {
+      handleThemeChange(theme: string) {
         const html = document.getElementById('html')
-        const lightTheme = 'winter' as string;
-        const darkTheme = 'night' as string;
+        this.$emit('theme-change', theme); // set theme
 
-        console.log(html)
-        if (this.darkMode) {
-          if (html) {
-            html.style.backgroundColor = '#F0F6FF';
-          }
-          this.$emit('theme-change', lightTheme)
-          this.darkMode = false;
-        } else {
-          if (html) {
-            html.style.backgroundColor = '#05080F';
-          }
-          this.$emit('theme-change', darkTheme)
-          this.darkMode = true;
+        // set background color of html element (for overscroll)
+        if (html) {
+          html.style.backgroundColor = this.themes.get(theme) as string;
         }
       }
     }

@@ -6,7 +6,7 @@
       @mouseenter="isHoveringNavbar = true" 
       @mouseleave="isHoveringNavbar = false" 
     />
-    <home-view :isHoveringNavbar="isHoveringNavbar" />
+    <home-view :isHoveringNavbar="isHoveringNavbar" :theme="theme" />
     <footer-bar/>
   </div>
 </template>

@@ -3,13 +3,13 @@
 
     <!-- fixed div for hero and particle bg -->
     <div class="w-full fixed">
-      <kinesis-container :active="scrollPosition == 0 && !isHoveringNavbar">
+      <kinesis-container :active="scrollPosition == 0">
         <div class="mx-24">
           <kinesis-element :strength="-10">
             <particle-background/>
           </kinesis-element>
           <div class="h-screen flex items-center justify-center max-w-7xl mx-auto" ref="content">
-            <div>
+            <div ref="headerDiv">
               <div ref="hi">
                 <kinesis-element :strength="8" class="font-extrabold text-5xl py-1 tracking-wider">Hi! 👋 </kinesis-element>
               </div>
@@ -51,6 +51,7 @@
               name="FFMpeg Video Editor" 
               description="A video editing toolbox with features such as segment, preview, and thumbnail generation." 
               img-path="../../assets/images/mcSwissPic.png"
+              :theme="theme"
             >
               <template v-slot:thumbnailSlot>
                 <img class="object-cover w-full h-full rounded" src="../assets/images/mcSwissPic.png" alt="Project Thumbnail">
@@ -64,29 +65,28 @@
             <project-card 
               class="col-span-1" 
               name="Song Request Chat Bot" 
-              description="A chat bot for Twitch that allows the user to queue songs to the streamers Spotify playlist."
+              description="A chat bot for Twitch that allows users to queue songs to a streamers Spotify playlist."
+              :theme="theme"
             >
               <template v-slot:thumbnailSlot>
                 <img class="object-cover w-full h-full rounded" src="../assets/images/mcSwissPic.png" alt="Project Thumbnail">
               </template>
               <template v-slot:languageSlot>
-                <div class="badge bg-green-500 text-neutral">Python</div>
+                <div class="badge bg-green-500 text-neutral border-none">Python</div>
               </template>
             </project-card>
 
           </div>
+
           <div class="space-y-4">
             <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40 text-secondary">Education 🎓</p>
-            <project-card 
+            <education-card 
               class="col-span-1"
-              name="FFMpeg Video Editor" 
-              description="A video editing toolbox with features such as segment, preview, and thumbnail generation." 
-              :id="1"
+              education="Bachelor of Applied Computer Science" 
+              dateRange="2017 - 2022" 
+              school="Dalhousie University"
+              :theme="theme"
             />
-            <project-card class="col-span-1" name="Another Project" description="This project was very cool because it was super neat teehee" :id="2"/>
-            <project-card class="col-span-1" name="Cool Project" description="This project was very cool because it was super neat teehee" :id="3"/>
-            <project-card class="col-span-1" name="Another Project" description="This project was very cool because it was super neat teehee" :id="4"/>
-          
           </div>
         </div>
       </div>
@@ -104,12 +104,16 @@ import ParticleBackground from '../components/ParticleBackground.vue';
 // @ts-ignore
 import { KinesisContainer, KinesisElement } from 'vue-kinesis';
 import ProjectCard from '../components/cards/ProjectCard.vue';
+import EducationCard from '../components/cards/EducationCard.vue';
 
 export default defineComponent({
   name: 'HomeView',
-  components: { KinesisContainer, KinesisElement, ParticleBackground, ProjectCard },
+  components: { EducationCard, KinesisContainer, KinesisElement, ParticleBackground, ProjectCard },
   props: {
-    isHoveringNavbar: Boolean
+    theme: {
+      type: String,
+      required: true
+    },
   },
   setup(){
     gsap.registerPlugin(ScrollTrigger);
@@ -145,9 +149,6 @@ export default defineComponent({
     // fade bio in on scroll
     this.bioFade(this.$refs.bio as HTMLElement);
     
-
-    // this.scrollFade(this.$refs.projectList as HTMLElement);
-
     // slide name on scroll
     this.slideName();
   },
@@ -202,6 +203,7 @@ export default defineComponent({
             toggleActions: "restart none reverse reverse"
           },
           x: distanceToRightEdge,
+          // y: -100
         });
       }
       

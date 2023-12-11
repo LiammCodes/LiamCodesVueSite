@@ -1,14 +1,12 @@
 <template>
   <kinesis-container>
-    <a href="#" :class="'flex flex-col card-bg items-center border border-base-100 rounded-lg shadow lg:flex-row lg:max-w-xl z-40 p-2 space-x-4 space-y-4' + (theme === 'coffee' ? ' coffee-card-bg' : ' night-card-bg')">
-      <kinesis-element :strength="5" class="lg:w-1/3 card-img">
-        <slot name="thumbnailSlot"></slot>
-      </kinesis-element>
-      <div class="flex flex-col justify-between leading-normal lg:w-2/3">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ name }}</h5>
-        <p class="mb-2 font-normal">{{ description }}</p>
-        <div class="row space-x-2 mb-2">
-          <slot name="languageSlot"></slot>
+    <a href="#" :class="'flex flex-col card-bg items-center border border-base-100 rounded-lg shadow lg:flex-row lg:max-w-xl z-40 p-4 space-x-4 space-y-4' + (theme === 'coffee' ? ' coffee-card-bg' : ' night-card-bg')">
+      <div class="leading-normal">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ education }}</h5>
+        <p class="mb-2 italic font-serif opacity-75"> {{ school }}</p>
+        <div class="flex flex-row items-center space-x-2 opacity-50">
+          <calendar-days-icon class="col w-5 h-5"/>
+          <p>{{ dateRange }}</p>
         </div>
       </div>
     </a>
@@ -17,25 +15,30 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { CalendarDaysIcon } from '@heroicons/vue/20/solid';
 // @ts-ignore
 import { KinesisContainer, KinesisElement } from 'vue-kinesis';
 export default defineComponent({
-  name: "ProjectCard",
+  name: "EducationCard",
   props: { 
-    name: {
+    education: {
       type: String,
-      required: true
+      required: true,
     },
-    description: {
+    school: {
       type: String,
-      required: true
+      required: true,
+    },
+    dateRange: {
+      type: String,
+      required: true,
     },
     theme: {
       type: String,
-      required: true
+      required: true,
     }
   },
-  components: { KinesisContainer, KinesisElement },
+  components: { CalendarDaysIcon, KinesisContainer, KinesisElement },
   data() {
     return {
       thumbnailArr: [
