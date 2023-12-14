@@ -1,17 +1,16 @@
 <template>
   <div class="w-full">
-
     <!-- fixed div for hero and particle bg -->
     <div class="w-full fixed">
       <kinesis-container :active="scrollPosition == 0">
         <div class="mx-24">
-          <kinesis-element :strength="-10">
+          <kinesis-element class="z-10" :strength="-10">
             <particle-background/>
           </kinesis-element>
           <div class="h-screen flex items-center justify-center max-w-7xl mx-auto" ref="content">
             <div ref="headerDiv">
               <div ref="hi">
-                <kinesis-element :strength="8" class="font-extrabold text-5xl py-1 tracking-wider">Hi! 👋 </kinesis-element>
+                <kinesis-element :strength="8" class="font-extrabold text-5xl py-1 tracking-wider">Hi! 👋</kinesis-element>
               </div>
               <div ref="name">
                 <kinesis-element :strength="2" class="font-extrabold text-5xl py-1 tracking-wider">
@@ -37,15 +36,15 @@
     </div>
     
     <!-- NON fixed div for scrolling page content -->
-    <div class="h-screen"></div>
+    <div class="h-screen" id="top" ref="topOfList"></div>
     <div class="project-box mx-24">
       <div class="max-w-7xl mx-auto grid grid-cols-7" ref="projectList">
         <div class="col-span-4"></div>
         <div class="col-span-3 space-y-16">
+
           <!-- project list -->
-          <div class="space-y-4">
+          <div class="space-y-4" ref="projectSecton">
             <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40">Projects 💻</p>
-            
             <project-card 
               class="col-span-1"
               name="FFMpeg Video Editor" 
@@ -61,7 +60,6 @@
                 <div class="badge badge-info">TypeScript</div>
               </template>
             </project-card>
-
             <project-card 
               class="col-span-1" 
               name="Song Request Chat Bot" 
@@ -75,16 +73,28 @@
                 <div class="badge bg-green-500 text-neutral border-none">Python</div>
               </template>
             </project-card>
-
           </div>
 
+          <!-- education list -->
           <div class="space-y-4">
             <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40 text-secondary">Education 🎓</p>
             <education-card 
               class="col-span-1"
-              education="Bachelor of Applied Computer Science" 
+              title="Bachelor of Applied Computer Science" 
               dateRange="2017 - 2022" 
-              school="Dalhousie University"
+              subtitle="Dalhousie University"
+              :theme="theme"
+            />
+          </div>
+
+          <!-- work experience list -->
+          <div class="space-y-4">
+            <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40 text-accent">Work Experience 📈</p>
+            <education-card 
+              class="col-span-1"
+              title="Full Stack Software Developer" 
+              dateRange="2022 - present" 
+              subtitle="Praxes Medical Group"
               :theme="theme"
             />
           </div>
@@ -94,7 +104,6 @@
     
   </div>
 </template>
-
 
 <script lang="ts">
 import { defineComponent } from 'vue';
@@ -122,10 +131,11 @@ export default defineComponent({
     return {
       scrollPosition: 0 as number,
       isHoveringProjects: false as boolean,
+      nameSlideAnimation: null as GSAPAnimation | null,
     }
   },
   created() {
-    window.addEventListener("resize", this.slideName);
+    // window.addEventListener("resize", this.slideName);
   },
   watch: {},
   mounted() {
@@ -163,7 +173,7 @@ export default defineComponent({
       gsap.to(ref as HTMLElement, {
         scrollTrigger: {
           trigger: '.project-box',
-          toggleActions: "restart none reverse reverse"
+          toggleActions: "restart none reverse reverse",
         },
         delay: 0,
         duration: 0.5,
@@ -191,22 +201,21 @@ export default defineComponent({
     },
 
     slideName() {
-      // get width of parent
-      const contentBox = this.$refs.content as HTMLElement;
-      const nameHeader = this.$refs.name as HTMLElement;
+      this.nameSlideAnimation = gsap.timeline({
+        scrollTrigger: {
+          // trigger: '.project-box',
+          trigger: this.$refs.projectSection as HTMLElement,
 
-      if (contentBox && nameHeader) {
-        const distanceToRightEdge = (80 + ((contentBox.clientWidth - nameHeader.clientWidth)/2)) * -1;
-        gsap.to(this.$refs.name as HTMLElement, {
-          scrollTrigger: {
-            trigger: '.project-box',
-            toggleActions: "restart none reverse reverse"
-          },
-          x: distanceToRightEdge,
-          // y: -100
-        });
-      }
-      
+          toggleActions: "restart none reverse reverse",
+          scrub: true,
+          invalidateOnRefresh: true,
+
+        },
+      }).to(this.$refs.name as HTMLElement, {
+        // @ts-ignore
+        x: () => (80 + (( this.$refs.content.clientWidth - this.$refs.name.clientWidth)/2)) * -1,
+        duration: 0.5,
+      });
     },
 
     scrollFade(ref: HTMLElement) {

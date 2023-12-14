@@ -2,8 +2,8 @@
   <kinesis-container>
     <a href="#" :class="'flex flex-col card-bg items-center border border-base-100 rounded-lg shadow lg:flex-row lg:max-w-xl z-40 p-4 space-x-4 space-y-4' + (theme === 'coffee' ? ' coffee-card-bg' : ' night-card-bg')">
       <div class="leading-normal">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ education }}</h5>
-        <p class="mb-2 italic font-serif opacity-75"> {{ school }}</p>
+        <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ title }}</h5>
+        <p class="mb-2 italic font-serif opacity-75"> {{ subtitle }}</p>
         <div class="flex flex-row items-center space-x-2 opacity-50">
           <calendar-days-icon class="col w-5 h-5"/>
           <p>{{ dateRange }}</p>
@@ -21,11 +21,11 @@ import { KinesisContainer, KinesisElement } from 'vue-kinesis';
 export default defineComponent({
   name: "EducationCard",
   props: { 
-    education: {
+    title: {
       type: String,
       required: true,
     },
-    school: {
+    subtitle: {
       type: String,
       required: true,
     },
