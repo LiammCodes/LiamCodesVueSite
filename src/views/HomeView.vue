@@ -43,8 +43,8 @@
         <div class="col-span-3 space-y-16">
 
           <!-- project list -->
-          <div class="space-y-4" ref="projectSecton">
-            <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40">Projects 💻</p>
+          <div class="space-y-4">
+            <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40" ref="projectsTitle">Projects 💻</p>
             <project-card 
               class="col-span-1"
               name="FFMpeg Video Editor" 
@@ -204,8 +204,8 @@ export default defineComponent({
       this.nameSlideAnimation = gsap.timeline({
         scrollTrigger: {
           // trigger: '.project-box',
-          trigger: this.$refs.projectSection as HTMLElement,
-
+          trigger: this.$refs.projectsTitle as HTMLElement,
+          end: "bottom center",
           toggleActions: "restart none reverse reverse",
           scrub: true,
           invalidateOnRefresh: true,
