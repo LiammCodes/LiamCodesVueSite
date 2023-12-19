@@ -3,48 +3,61 @@
     <!-- fixed div for hero and particle bg -->
     <div class="w-full fixed">
       <kinesis-container :active="scrollPosition == 0">
-        <div class="mx-24">
+        <div class="mx-6 md:mx-24">
           <kinesis-element class="z-10" :strength="-10">
             <particle-background/>
           </kinesis-element>
           <div class="h-screen flex items-center justify-center max-w-7xl mx-auto" ref="content">
-            <div ref="headerDiv">
+            <div ref="headerDiv" class="text-4xl md:text-5xl">
               <div ref="hi">
-                <kinesis-element :strength="8" class="font-extrabold text-5xl py-1 tracking-wider">Hi! 👋</kinesis-element>
+                <kinesis-element :strength="8" class="font-extrabold py-1 tracking-wider">Hi! 👋</kinesis-element>
               </div>
               <div ref="name">
-                <kinesis-element :strength="2" class="font-extrabold text-5xl py-1 tracking-wider">
+                <kinesis-element :strength="2" class="font-extrabold py-1 tracking-wider">
                   <span ref="im">I'm </span>
                   <span class="text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-focus">Liam Moore</span>
                 </kinesis-element>
-                <div ref="bio" class="fixed mt-6 ml-20 card-bg">
-                  <div class="px-5 pb-4 pt-2 card-bg items-center border border-neutral rounded-lg shadow lg:flex-row lg:max-w-xl z-40">
-                    <h5 class="font-extrabold text-xl py-1 tracking-wider text-secondary">TLDR</h5>
-                    <p class="pb-2">
-                      I'm a software developer from Nova Scotia Canada specializing in UI/UX design and development.
-                      Currently working full time as a Full Stack developer with Vue3, TypeScript and Quasar. 
-                    </p>
-                    <!-- <h5 class="font-extrabold text-xl py-1 tracking-wider text-secondary">Socials</h5>
-                    <p>
-                      I'm a software developer from Nova Scotia Canada specializing in UI/UX design and development.
-                      Currently working full time as a Full Stack developer with Vue3, TypeScript and Quasar. 
-                    </p> -->
-                  </div>
-                </div>
               </div>
               <div ref="title">
-                <kinesis-element :strength="8" class="font-extrabold text-5xl tracking-wider">A Fullstack Software Developer</kinesis-element>
+                <kinesis-element :strength="8" class="font-extrabold tracking-wider">A Fullstack Software Developer</kinesis-element>
               </div>
             </div>
           </div>
         </div>
       </kinesis-container>
     </div>
-    
+
+    <!-- Bio in column (much better solution)-->
+    <div class="fixed h-screen w-full grid grid-cols-7">
+      <div class="col-span-4 flex items-center mx-6 md:mx-24">
+        <div class="flex flex-col space-y-4">
+          <div class="flex flex-row items-center">
+            <div class="z-40 w-20 md:w-52">
+              <img ref="avatar" class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
+            </div>
+            <div ref="subName" class="pl-3">
+              
+              <div class="font-bold py-1 text-xl tracking-wider">
+                <span>NS, Canada</span>
+              </div>
+            </div>
+          </div>
+          
+          <div ref="bio" class="px-5 pb-4 pt-2 border border-neutral rounded-lg shadow lg:flex-row lg:max-w-xl card-bg mb-4">
+            <h5 class="font-extrabold text-xl py-1 tracking-wider text-secondary">TLDR</h5>
+            <p class="pb-2">
+              I'm a software developer from Nova Scotia Canada specializing in UI/UX design and development.
+              Currently working full time as a Full Stack developer with Vue3, TypeScript and Quasar. 
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- NON fixed div for scrolling page content -->
     <div class="h-screen" id="top" ref="topOfList"></div>
-    <div class="project-box mx-24">
-      <div class="max-w-7xl mx-auto grid grid-cols-7" ref="projectList">
+    <div class="project-box mx-6 md:mx-24" ref="projectList">
+      <div class="max-w-7xl mx-auto grid grid-cols-7">
         <div class="col-span-4"></div>
         <div class="col-span-3 space-y-16">
 
@@ -114,7 +127,6 @@
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -143,12 +155,7 @@ export default defineComponent({
   data(){
     return {
       scrollPosition: 0 as number,
-      isHoveringProjects: false as boolean,
-      nameSlideAnimation: null as GSAPAnimation | null,
     }
-  },
-  created() {
-    // window.addEventListener("resize", this.slideName);
   },
   watch: {},
   mounted() {
@@ -171,7 +178,9 @@ export default defineComponent({
 
     // fade bio in on scroll
     this.bioFade(this.$refs.bio as HTMLElement);
-    
+    this.bioFade(this.$refs.avatar as HTMLElement);
+    this.bioFade(this.$refs.subName as HTMLElement);
+
     // slide name on scroll
     this.slideName();
   },
@@ -182,10 +191,29 @@ export default defineComponent({
   },
 
   methods: {
+    bioFade(ref: HTMLElement) {
+      let animation = gsap.timeline({
+        scrollTrigger: {
+          trigger: this.$refs.projectsTitle as HTMLElement,
+          end: "bottom center",
+          toggleActions: "restart none reverse reverse",
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      })
+      animation.from(ref as HTMLElement, {
+        opacity: 0
+      })
+      animation.to(ref as HTMLElement, {
+        opacity: 1,
+      });
+    },
+
     headerFade(ref: HTMLElement) {
       gsap.to(ref as HTMLElement, {
         scrollTrigger: {
-          trigger: '.project-box',
+          trigger: this.$refs.projectList as HTMLElement,
+          // trigger: '.project-box',
           toggleActions: "restart none reverse reverse",
         },
         delay: 0,
@@ -195,43 +223,29 @@ export default defineComponent({
       });
     },
 
-    bioFade(ref: HTMLElement) {
-      gsap.from(ref as HTMLElement, {
-        scrollTrigger: {
-          trigger: this.$refs.projectsTitle as HTMLElement,
-          toggleActions: "restart none reverse reverse",
-          start: "bottom bottom",
-          scrub: true
-        },
-        y: 70,
-        opacity: 0, // Start with opacity 0
-        duration: 0.5, // Animation duration
-      });
-    },
-
     handleScroll() {
       // Update the scrollPosition data property with the current scroll position
       this.scrollPosition = window.scrollY || document.documentElement.scrollTop;
     },
 
     slideName() {
-      this.nameSlideAnimation = gsap.timeline({
+      gsap.timeline({
         scrollTrigger: {
-          // trigger: '.project-box',
           trigger: this.$refs.projectsTitle as HTMLElement,
           end: "bottom center",
           toggleActions: "restart none reverse reverse",
           scrub: true,
           invalidateOnRefresh: true,
-
         },
       }).to(this.$refs.name as HTMLElement, {
         // @ts-ignore
-        x: () => (80 + (( this.$refs.content.clientWidth - this.$refs.name.clientWidth)/2)) * -1,
+        x: () => ((80 + (( this.$refs.content.clientWidth - this.$refs.name.clientWidth)/2)) * -1) + this.$refs.avatar.clientWidth,
+        // y: () => -150,
+        // @ts-ignore
+        y: () => (this.$refs.avatar.clientHeight/1.5) * -1,
         duration: 0.5,
       });
     },
-
     scrollFade(ref: HTMLElement) {
       gsap.to(ref, {
         scrollTrigger: {

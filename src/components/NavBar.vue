@@ -20,7 +20,7 @@
         <div tabindex="0" role="button" class="btn btn-ghost rounded-btn">Theme</div>
         <ul tabindex="0" class="menu dropdown-content z-50 p-2 shadow bg-base-100 rounded-box w-52 mt-4">
           <li><div class="btn btn-sm btn-ghost rounded-btn" @click="handleThemeChange('night')">Night</div></li> 
-          <li><div class="btn btn-sm btn-ghost rounded-btn" @click="handleThemeChange('coffee')">Coffee</div></li> 
+          <li><div class="btn btn-sm btn-ghost rounded-btn" @click="handleThemeChange('nord')">Nord</div></li> 
           <li><div class="btn btn-sm btn-ghost rounded-btn" @click="handleThemeChange('synthwave')">Synthwave</div></li> 
         </ul>
       </div>
