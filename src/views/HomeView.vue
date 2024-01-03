@@ -16,6 +16,12 @@
                 <kinesis-element :strength="2" class="font-extrabold py-1 tracking-wider">
                   <span ref="im">I'm </span>
                   <span class="text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-focus">Liam Moore</span>
+                  <div ref="subName" class="pl-3 absolute">
+                    <div class="font-bold py-2 pl-20 text-xl tracking-wider">
+                      <div>Fullstack Software Developer</div>
+                      <div>NS, Canada</div>
+                    </div>
+                  </div>
                 </kinesis-element>
               </div>
               <div ref="title">
@@ -34,12 +40,6 @@
           <div class="flex flex-row items-center">
             <div class="z-40 w-20 md:w-52">
               <img ref="avatar" class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
-            </div>
-            <div ref="subName" class="pl-3">
-              
-              <div class="font-bold py-1 text-xl tracking-wider">
-                <span>NS, Canada</span>
-              </div>
             </div>
           </div>
           
