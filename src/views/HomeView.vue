@@ -2,7 +2,7 @@
   <div class="w-full">
     <!-- fixed div for hero and particle bg -->
     <div class="w-full fixed">
-      <kinesis-container :active="scrollPosition == 0">
+      <kinesis-container class="z-40" :active="scrollPosition == 0">
         <div class="mx-6 md:mx-24">
           <kinesis-element class="z-10" :strength="-10">
             <particle-background/>
@@ -12,18 +12,21 @@
               <div ref="hi">
                 <kinesis-element :strength="8" class="font-extrabold py-1 tracking-wider">Hi! 👋</kinesis-element>
               </div>
-              <div ref="name">
-                <kinesis-element :strength="2" class="font-extrabold py-1 tracking-wider">
-                  <span ref="im">I'm </span>
+              <kinesis-element :strength="2" class="font-extrabold py-1 tracking-wider">
+                <span ref="im">I'm </span>
+                <div ref="name" class="inline-block">
                   <span class="text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-focus">Liam Moore</span>
-                  <div ref="subName" class="pl-3 absolute">
-                    <div class="font-bold py-2 pl-20 text-xl tracking-wider">
+                  <div ref="subName" class="absolute pl-1">
+                    <div class="font-bold py-2 text-lg tracking-wider">
                       <div>Fullstack Software Developer</div>
                       <div>NS, Canada</div>
+                      <div>
+                        
+                      </div>
                     </div>
                   </div>
-                </kinesis-element>
-              </div>
+                </div>
+              </kinesis-element>
               <div ref="title">
                 <kinesis-element :strength="8" class="font-extrabold tracking-wider">A Fullstack Software Developer</kinesis-element>
               </div>
@@ -34,32 +37,37 @@
     </div>
 
     <!-- Bio in column (much better solution)-->
-    <div class="fixed h-screen w-full grid grid-cols-7">
-      <div class="col-span-4 flex items-center mx-6 md:mx-24">
-        <div class="flex flex-col space-y-4">
-          <div class="flex flex-row items-center">
-            <div class="z-40 w-20 md:w-52">
-              <img ref="avatar" class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
+    <div class="fixed flex items-center justify-center h-screen w-full">
+      <div class="flex w-full">
+        <div class="flex justify-end ml-6 md:ml-24 w-full">
+          <div class="flex flex-col space-y-4">
+            <div class="flex flex-row items-center">
+              <div ref="avatar" class="z-40 pr-5 w-24 md:w-52">
+                <img class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
+              </div>
+            </div>
+            <div ref="bio" class="px-5 pb-4 pt-2 border border-neutral rounded-lg shadow lg:flex-row lg:max-w-xl card-bg mb-4">
+              <h5 class="font-extrabold text-xl py-1 tracking-wider text-secondary">TLDR</h5>
+              <p class="pb-2">
+                I'm a software developer from Nova Scotia Canada specializing in UI/UX design and development.
+                Currently working full time as a Full Stack developer with Vue3, TypeScript and Quasar. 
+              </p>
             </div>
           </div>
-          
-          <div ref="bio" class="px-5 pb-4 pt-2 border border-neutral rounded-lg shadow lg:flex-row lg:max-w-xl card-bg mb-4">
-            <h5 class="font-extrabold text-xl py-1 tracking-wider text-secondary">TLDR</h5>
-            <p class="pb-2">
-              I'm a software developer from Nova Scotia Canada specializing in UI/UX design and development.
-              Currently working full time as a Full Stack developer with Vue3, TypeScript and Quasar. 
-            </p>
-          </div>
         </div>
+        <div class="flex-col w-full mx-6 md:mx-24"></div>
       </div>
+      
     </div>
 
     <!-- NON fixed div for scrolling page content -->
     <div class="h-screen" id="top" ref="topOfList"></div>
-    <div class="project-box mx-6 md:mx-24" ref="projectList">
-      <div class="max-w-7xl mx-auto grid grid-cols-7">
-        <div class="col-span-4"></div>
-        <div class="col-span-3 space-y-16">
+    <div class="flex w-full" ref="projectList">
+      <div class="flex-col w-full"></div>
+
+      <div class="flex items-end justify-end w-full">
+       
+        <div class="w-full space-y-16">
 
           <!-- project list -->
           <div class="space-y-4">
@@ -182,7 +190,9 @@ export default defineComponent({
     this.bioFade(this.$refs.subName as HTMLElement);
 
     // slide name on scroll
-    this.slideName();
+    this.slideToAvatar(this.$refs.name as HTMLElement);
+    // Update the animation when the window is resized
+    // window.addEventListener('resize', this.handleResize);
   },
 
   beforeDestroy() {
@@ -213,7 +223,6 @@ export default defineComponent({
       gsap.to(ref as HTMLElement, {
         scrollTrigger: {
           trigger: this.$refs.projectList as HTMLElement,
-          // trigger: '.project-box',
           toggleActions: "restart none reverse reverse",
         },
         delay: 0,
@@ -223,12 +232,18 @@ export default defineComponent({
       });
     },
 
+    handleResize() {
+      // Update the animation when the window is resized
+      this.slideToAvatar(this.$refs.name as HTMLElement);
+    },
+
     handleScroll() {
       // Update the scrollPosition data property with the current scroll position
       this.scrollPosition = window.scrollY || document.documentElement.scrollTop;
     },
 
-    slideName() {
+    slideToAvatar(ref: HTMLElement) {
+      const avatar = this.$refs.avatar as HTMLElement;
       gsap.timeline({
         scrollTrigger: {
           trigger: this.$refs.projectsTitle as HTMLElement,
@@ -237,15 +252,23 @@ export default defineComponent({
           scrub: true,
           invalidateOnRefresh: true,
         },
-      }).to(this.$refs.name as HTMLElement, {
-        // @ts-ignore
-        x: () => ((80 + (( this.$refs.content.clientWidth - this.$refs.name.clientWidth)/2)) * -1) + this.$refs.avatar.clientWidth,
-        // y: () => -150,
-        // @ts-ignore
-        y: () => (this.$refs.avatar.clientHeight/1.5) * -1,
+      }).to(ref, {
+        x: () => {
+          // Calculate the target X position based on the avatar position
+          const avatarRect = avatar.getBoundingClientRect();
+          const nameRect = ref.getBoundingClientRect();
+          return avatarRect.right - nameRect.left;
+        },
+        y: () => {
+          // Calculate the target Y position based on the avatar position
+          const avatarRect = avatar.getBoundingClientRect();
+          const nameRect = ref.getBoundingClientRect();
+          return avatarRect.bottom - nameRect.bottom;
+        },
         duration: 0.5,
       });
     },
+
     scrollFade(ref: HTMLElement) {
       gsap.to(ref, {
         scrollTrigger: {
