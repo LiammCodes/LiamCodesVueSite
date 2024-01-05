@@ -47,7 +47,7 @@ export default defineComponent({
     }
   },
   mounted() {
-    console.log(this.thumbnailArr);
+    // console.log(this.thumbnailArr);
   },
   methods: {
 

@@ -41,18 +41,20 @@
       <div class="flex w-full">
         <div class="flex justify-end mx-3 md:mx-12 w-full">
           <div class="flex flex-col space-y-4">
-            <div class="flex flex-row items-center">
-              <div ref="avatar" class="z-40 pr-5 w-24 md:w-52">
-                <img class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
+            <div ref="avatar" class="z-40 pr-5 w-24 md:w-52">
+              <img class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
+            </div>
+            
+            <div ref="bio">
+              <div class="px-5 pb-4 pt-2 border border-neutral rounded-lg shadow lg:flex-row lg:max-w-xl mb-4 card-bg" >
+                <h5 class="font-extrabold text-xl py-1 tracking-wider text-secondary">TLDR</h5>
+                <p class="pb-2">
+                  I'm a software developer from Nova Scotia Canada specializing in UI/UX design and development.
+                  Currently working full time as a Full Stack developer with Vue3, TypeScript and Quasar. 
+                </p>
               </div>
             </div>
-            <div ref="bio" class="px-5 pb-4 pt-2 border border-neutral rounded-lg shadow lg:flex-row lg:max-w-xl card-bg mb-4">
-              <h5 class="font-extrabold text-xl py-1 tracking-wider text-secondary">TLDR</h5>
-              <p class="pb-2">
-                I'm a software developer from Nova Scotia Canada specializing in UI/UX design and development.
-                Currently working full time as a Full Stack developer with Vue3, TypeScript and Quasar. 
-              </p>
-            </div>
+            
           </div>
         </div>
         <div class="flex-col w-full mx-3 md:mx-12"></div>
@@ -165,16 +167,16 @@ export default defineComponent({
       scrollPosition: 0 as number,
     }
   },
-  watch: {},
+  watch: {
+    
+  },
   mounted() {
-    // Add an event listener to track scroll position
-    window.addEventListener('scroll', this.handleScroll);
 
     // fade header in on load
     gsap.from(this.$refs.headerDiv as any, { 
       delay: 0.5,
       duration: 1,
-      y: 100,
+      y: 0,
       autoAlpha: 0,
       ease: "black.out(1.7)"
     });
@@ -190,14 +192,7 @@ export default defineComponent({
     this.bioFade(this.$refs.subName as HTMLElement);
 
     // slide name on scroll
-    this.slideToAvatar(this.$refs.name as HTMLElement);
-    // Update the animation when the window is resized
-    // window.addEventListener('resize', this.handleResize);
-  },
-
-  beforeDestroy() {
-    // Remove the event listener when the component is destroyed
-    window.removeEventListener('scroll', this.handleScroll);
+    this.slideToAvatar();
   },
 
   methods: {
@@ -232,18 +227,14 @@ export default defineComponent({
       });
     },
 
-    handleResize() {
-      // Update the animation when the window is resized
-      this.slideToAvatar(this.$refs.name as HTMLElement);
-    },
-
     handleScroll() {
       // Update the scrollPosition data property with the current scroll position
       this.scrollPosition = window.scrollY || document.documentElement.scrollTop;
     },
 
-    slideToAvatar(ref: HTMLElement) {
+    slideToAvatar() {
       const avatar = this.$refs.avatar as HTMLElement;
+      const name = this.$refs.name as HTMLElement
       gsap.timeline({
         scrollTrigger: {
           trigger: this.$refs.projectsTitle as HTMLElement,
@@ -252,20 +243,23 @@ export default defineComponent({
           scrub: true,
           invalidateOnRefresh: true,
         },
-      }).to(ref, {
+      }).to(name as HTMLElement, {
         x: () => {
           // Calculate the target X position based on the avatar position
           const avatarRect = avatar.getBoundingClientRect();
-          const nameRect = ref.getBoundingClientRect();
+          const nameRect = name.getBoundingClientRect();
           return avatarRect.right - nameRect.left;
         },
         y: () => {
           // Calculate the target Y position based on the avatar position
           const avatarRect = avatar.getBoundingClientRect();
-          const nameRect = ref.getBoundingClientRect();
-          return avatarRect.bottom - nameRect.bottom;
+          const nameRect = name.getBoundingClientRect();
+          // Calculate the middle of the avatar
+          const avatarMiddleY = (avatarRect.top + avatarRect.bottom) / 2;
+
+          // Set the target Y position to align the middle of the name with the middle of the avatar
+          return avatarMiddleY - nameRect.bottom;
         },
-        duration: 0.5,
       });
     },
 
@@ -298,7 +292,7 @@ export default defineComponent({
         duration: 0.5,
         ease: 'power2.out',
       });
-    }
+    },
   }
 });
 </script>
