@@ -39,7 +39,7 @@
     <!-- Bio in column (much better solution)-->
     <div class="fixed flex items-center justify-center h-screen w-full">
       <div class="flex w-full">
-        <div class="flex justify-end ml-6 md:ml-24 w-full">
+        <div class="flex justify-end mx-3 md:mx-12 w-full">
           <div class="flex flex-col space-y-4">
             <div class="flex flex-row items-center">
               <div ref="avatar" class="z-40 pr-5 w-24 md:w-52">
@@ -55,17 +55,17 @@
             </div>
           </div>
         </div>
-        <div class="flex-col w-full mx-6 md:mx-24"></div>
+        <div class="flex-col w-full mx-3 md:mx-12"></div>
       </div>
-      
     </div>
 
     <!-- NON fixed div for scrolling page content -->
     <div class="h-screen" id="top" ref="topOfList"></div>
-    <div class="flex w-full" ref="projectList">
-      <div class="flex-col w-full"></div>
 
-      <div class="flex items-end justify-end w-full">
+    <div class="flex" ref="projectList">
+      <div class="flex-col w-full mx-3 md:mx-12"></div>
+
+      <div class="flex-col w-full justify-start mx-3 md:mx-12">
        
         <div class="w-full space-y-16">
 
