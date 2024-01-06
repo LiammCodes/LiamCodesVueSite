@@ -2,17 +2,17 @@
   <div class="w-full">
     <!-- fixed div for hero and particle bg -->
     <div class="w-full fixed">
-      <kinesis-container class="z-40" :active="scrollPosition == 0">
+      <div class="z-40">
         <div class="mx-6 md:mx-24">
-          <kinesis-element class="z-10" :strength="-10">
+          <div class="z-10">
             <particle-background/>
-          </kinesis-element>
+          </div>
           <div class="h-screen flex items-center justify-center max-w-7xl mx-auto" ref="content">
             <div ref="headerDiv" class="text-4xl md:text-5xl">
               <div ref="hi">
-                <kinesis-element :strength="8" class="font-extrabold py-1 tracking-wider">Hi! 👋</kinesis-element>
+                <span class="font-extrabold py-1 tracking-wider">Hi! 👋</span>
               </div>
-              <kinesis-element :strength="2" class="font-extrabold py-1 tracking-wider">
+              <div class="font-extrabold py-1 tracking-wider">
                 <span ref="im">I'm </span>
                 <div ref="name" class="inline-block">
                   <span class="text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-focus">Liam Moore</span>
@@ -26,26 +26,26 @@
                     </div>
                   </div>
                 </div>
-              </kinesis-element>
+              </div>
               <div ref="title">
-                <kinesis-element :strength="8" class="font-extrabold tracking-wider">A Fullstack Software Developer</kinesis-element>
+                <span class="font-extrabold tracking-wider">A Fullstack Software Developer</span>
               </div>
             </div>
           </div>
         </div>
-      </kinesis-container>
+      </div>
     </div>
 
     <!-- Bio in column (much better solution)-->
-    <div class="fixed flex items-center justify-center h-screen w-full">
-      <div class="flex w-full">
-        <div class="flex justify-end mx-3 md:mx-12 w-full">
-          <div class="flex flex-col space-y-4">
+    <div class="md:fixed flex items-center w-full h-screen">
+      <div class="flex max-w-7xl mx-auto">
+        <div class="flex mx-3 md:mx-12 w-full">
+          <div class="flex flex-col space-y-4 w-full">
             <div ref="avatar" class="z-40 pr-5 w-24 md:w-52">
               <img class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
             </div>
-            <div ref="bio">
-              <div class="px-5 pb-4 pt-2 border border-neutral rounded-lg shadow lg:flex-row lg:max-w-xl mb-4 card-bg" >
+            <div ref="bio" class="w-full">
+              <div class="px-5 pb-4 pt-2 border border-neutral rounded-lg shadow lg:flex-row mb-4 card-bg" >
                 <h5 class="font-extrabold text-xl py-1 tracking-wider text-secondary">TLDR</h5>
                 <p class="pb-2">
                   I'm a software developer from Nova Scotia Canada specializing in UI/UX design and development.
@@ -55,24 +55,24 @@
             </div>
           </div>
         </div>
-        <div class="flex-col w-full mx-3 md:mx-12"></div>
+        <div class="hidden lg:block flex-col w-full mx-3 md:mx-12"></div>
       </div>
     </div>
 
     <!-- CONTENT -->
     <div class="max-w-7xl mx-auto">
       <!-- NON fixed div for scrolling page content -->
-      <div class="h-screen" id="top" ref="topOfList"></div>
-      <div class="flex" ref="projectList">
-        <div class="flex-col w-full mx-3 md:mx-12"></div>
-        <div class="flex-col w-full justify-start mx-3 md:mx-12">
+      <div class="h-screen"></div>
+      <div class="flex">
+        <div class="hidden lg:block flex-col w-full mx-3 md:mx-12"></div>
+        <div ref="projectList" class="flex-col w-full justify-start mx-3 md:mx-12">
           <div class="w-full space-y-16">
             <!-- project list -->
             <div class="space-y-4">
               <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40" ref="projectsTitle">Projects 💻</p>
               <project-card 
                 class="col-span-1"
-                name="FFMpeg Video Editor" 
+                name="FFmpeg Video Editor" 
                 description="A video editing toolbox with features such as segment, preview, and thumbnail generation." 
                 img-path="../../assets/images/mcSwissPic.png"
                 :theme="theme"
@@ -142,14 +142,12 @@ import { defineComponent } from 'vue';
 import gsap from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ParticleBackground from '../components/ParticleBackground.vue';
-// @ts-ignore
-import { KinesisContainer, KinesisElement } from 'vue-kinesis';
 import ProjectCard from '../components/cards/ProjectCard.vue';
 import TimePeriodCard from '../components/cards/TimePeriodCard.vue';
 
 export default defineComponent({
   name: 'HomeView',
-  components: { TimePeriodCard, KinesisContainer, KinesisElement, ParticleBackground, ProjectCard },
+  components: { TimePeriodCard, ParticleBackground, ProjectCard },
   props: {
     theme: {
       type: String,
@@ -160,9 +158,7 @@ export default defineComponent({
     gsap.registerPlugin(ScrollTrigger);
   },
   data(){
-    return {
-      scrollPosition: 0 as number,
-    }
+    return {}
   },
   watch: {
     
@@ -173,7 +169,6 @@ export default defineComponent({
     gsap.from(this.$refs.headerDiv as any, { 
       delay: 0.5,
       duration: 1,
-      y: 0,
       autoAlpha: 0,
       ease: "black.out(1.7)"
     });
@@ -222,11 +217,6 @@ export default defineComponent({
         autoAlpha: 0,
         ease: "black.out(1.7)"
       });
-    },
-
-    handleScroll() {
-      // Update the scrollPosition data property with the current scroll position
-      this.scrollPosition = window.scrollY || document.documentElement.scrollTop;
     },
 
     slideToAvatar() {
@@ -284,7 +274,7 @@ export default defineComponent({
             });
           },
         },
-        autoAlpha: 0, // Set initial opacity
+        autoAlpha: 0,
         delay: 0,
         duration: 0.5,
         ease: 'power2.out',
