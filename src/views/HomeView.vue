@@ -44,7 +44,6 @@
             <div ref="avatar" class="z-40 pr-5 w-24 md:w-52">
               <img class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
             </div>
-            
             <div ref="bio">
               <div class="px-5 pb-4 pt-2 border border-neutral rounded-lg shadow lg:flex-row lg:max-w-xl mb-4 card-bg" >
                 <h5 class="font-extrabold text-xl py-1 tracking-wider text-secondary">TLDR</h5>
@@ -54,85 +53,83 @@
                 </p>
               </div>
             </div>
-            
           </div>
         </div>
         <div class="flex-col w-full mx-3 md:mx-12"></div>
       </div>
     </div>
 
-    <!-- NON fixed div for scrolling page content -->
-    <div class="h-screen" id="top" ref="topOfList"></div>
+    <!-- CONTENT -->
+    <div class="max-w-7xl mx-auto">
+      <!-- NON fixed div for scrolling page content -->
+      <div class="h-screen" id="top" ref="topOfList"></div>
+      <div class="flex" ref="projectList">
+        <div class="flex-col w-full mx-3 md:mx-12"></div>
+        <div class="flex-col w-full justify-start mx-3 md:mx-12">
+          <div class="w-full space-y-16">
+            <!-- project list -->
+            <div class="space-y-4">
+              <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40" ref="projectsTitle">Projects 💻</p>
+              <project-card 
+                class="col-span-1"
+                name="FFMpeg Video Editor" 
+                description="A video editing toolbox with features such as segment, preview, and thumbnail generation." 
+                img-path="../../assets/images/mcSwissPic.png"
+                :theme="theme"
+              >
+                <template v-slot:thumbnailSlot>
+                  <img class="object-cover w-full h-full rounded" src="../assets/images/mcSwissPic.png" alt="Project Thumbnail">
+                </template>
+                <template v-slot:languageSlot>
+                  <div class="badge badge-success">Vue 3</div>
+                  <div class="badge badge-info">TypeScript</div>
+                </template>
+              </project-card>
+              <project-card 
+                class="col-span-1" 
+                name="Song Request Chat Bot" 
+                description="A chat bot for Twitch that allows users to queue songs to a streamers Spotify playlist."
+                :theme="theme"
+              >
+                <template v-slot:thumbnailSlot>
+                  <img class="object-cover w-full h-full rounded" src="../assets/images/mcSwissPic.png" alt="Project Thumbnail">
+                </template>
+                <template v-slot:languageSlot>
+                  <div class="badge bg-green-500 text-neutral border-none">Python</div>
+                </template>
+              </project-card>
+            </div>
 
-    <div class="flex" ref="projectList">
-      <div class="flex-col w-full mx-3 md:mx-12"></div>
+            <!-- education list -->
+            <div class="space-y-4">
+              <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40 text-secondary">Education 🎓</p>
+              <time-period-card 
+                class="col-span-1"
+                title="Bachelor of Applied Computer Science" 
+                dateRange="2017 - 2022" 
+                subtitle="Dalhousie University"
+                :theme="theme"
+              />
+            </div>
 
-      <div class="flex-col w-full justify-start mx-3 md:mx-12">
-       
-        <div class="w-full space-y-16">
-
-          <!-- project list -->
-          <div class="space-y-4">
-            <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40" ref="projectsTitle">Projects 💻</p>
-            <project-card 
-              class="col-span-1"
-              name="FFMpeg Video Editor" 
-              description="A video editing toolbox with features such as segment, preview, and thumbnail generation." 
-              img-path="../../assets/images/mcSwissPic.png"
-              :theme="theme"
-            >
-              <template v-slot:thumbnailSlot>
-                <img class="object-cover w-full h-full rounded" src="../assets/images/mcSwissPic.png" alt="Project Thumbnail">
-              </template>
-              <template v-slot:languageSlot>
-                <div class="badge badge-success">Vue 3</div>
-                <div class="badge badge-info">TypeScript</div>
-              </template>
-            </project-card>
-            <project-card 
-              class="col-span-1" 
-              name="Song Request Chat Bot" 
-              description="A chat bot for Twitch that allows users to queue songs to a streamers Spotify playlist."
-              :theme="theme"
-            >
-              <template v-slot:thumbnailSlot>
-                <img class="object-cover w-full h-full rounded" src="../assets/images/mcSwissPic.png" alt="Project Thumbnail">
-              </template>
-              <template v-slot:languageSlot>
-                <div class="badge bg-green-500 text-neutral border-none">Python</div>
-              </template>
-            </project-card>
-          </div>
-
-          <!-- education list -->
-          <div class="space-y-4">
-            <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40 text-secondary">Education 🎓</p>
-            <time-period-card 
-              class="col-span-1"
-              title="Bachelor of Applied Computer Science" 
-              dateRange="2017 - 2022" 
-              subtitle="Dalhousie University"
-              :theme="theme"
-            />
-          </div>
-
-          <!-- work experience list -->
-          <div class="space-y-4">
-            <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40 text-accent">Work Experience 📈</p>
-            <time-period-card 
-              class="col-span-1"
-              title="Full Stack Software Developer" 
-              dateRange="2022 - present" 
-              subtitle="Praxes Medical Group"
-              :theme="theme"
-            />
-            <time-period-card 
-              class="col-span-1"
-              title="Assistant Platform Development Manager" 
-              dateRange="2019 - 2022" 
-              subtitle="McIntyre Media Inc."
-              :theme="theme"
-            />
+            <!-- work experience list -->
+            <div class="space-y-4">
+              <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40 text-accent">Work Experience 📈</p>
+              <time-period-card 
+                class="col-span-1"
+                title="Full Stack Software Developer" 
+                dateRange="2022 - present" 
+                subtitle="Praxes Medical Group"
+                :theme="theme"
+              />
+              <time-period-card 
+                class="col-span-1"
+                title="Assistant Platform Development Manager" 
+                dateRange="2019 - 2022" 
+                subtitle="McIntyre Media Inc."
+                :theme="theme"
+              />
+            </div>
           </div>
         </div>
       </div>
