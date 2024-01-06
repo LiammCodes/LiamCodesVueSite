@@ -7,7 +7,8 @@
           <div class="z-10">
             <particle-background/>
           </div>
-          <div class="h-screen flex items-center justify-center max-w-7xl mx-auto" ref="content">
+          <!-- hide on mobile to avoid animation weirdness -->
+          <div v-if="!isMobile" class="h-screen flex items-center justify-center max-w-7xl mx-auto" ref="content">
             <div ref="headerDiv" class="text-4xl md:text-5xl">
               <div ref="hi">
                 <span class="font-extrabold py-1 tracking-wider">Hi! 👋</span>
@@ -20,9 +21,6 @@
                     <div class="font-bold py-2 text-lg tracking-wider">
                       <div>Fullstack Software Developer</div>
                       <div>NS, Canada</div>
-                      <div>
-                        
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -32,26 +30,42 @@
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
 
+    <div v-if="isMobile" class="pt-32 pb-16">
+      <div class="mx-3 md:mx-12">
+        <div class="w-full flex justify-center pb-14">
+          <div class="z-40 pr-5 w-60">
+            <img class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
+          </div>
+          <div class="py-2 text-lg tracking-wider flex items-center">
+            <div>
+              <span class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-focus">Liam Moore</span>
+              <div class="font-bold pl-1">
+                <div>Fullstack Software Developer</div>
+                <div>NS, Canada</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <bio-card/>
+      </div>
+    </div>
+
     <!-- Bio in column (much better solution)-->
-    <div class="md:fixed flex items-center w-full h-screen">
+    <div v-else class="fixed flex items-center w-full h-screen">
       <div class="flex max-w-7xl mx-auto">
         <div class="flex mx-3 md:mx-12 w-full">
           <div class="flex flex-col space-y-4 w-full">
-            <div ref="avatar" class="z-40 pr-5 w-24 md:w-52">
+            <!-- avatar -->
+            <div ref="avatar" class="z-40 pr-5 w-44 xl:w-52">
               <img class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
             </div>
             <div ref="bio" class="w-full">
-              <div class="px-5 pb-4 pt-2 border border-neutral rounded-lg shadow lg:flex-row mb-4 card-bg" >
-                <h5 class="font-extrabold text-xl py-1 tracking-wider text-secondary">TLDR</h5>
-                <p class="pb-2">
-                  I'm a software developer from Nova Scotia Canada specializing in UI/UX design and development.
-                  Currently working full time as a Full Stack developer with Vue3, TypeScript and Quasar. 
-                </p>
-              </div>
+              <bio-card/>
             </div>
           </div>
         </div>
@@ -61,15 +75,16 @@
 
     <!-- CONTENT -->
     <div class="max-w-7xl mx-auto">
+      
       <!-- NON fixed div for scrolling page content -->
-      <div class="h-screen"></div>
+      <div v-if="!isMobile" class="h-screen"></div>
       <div class="flex">
         <div class="hidden lg:block flex-col w-full mx-3 md:mx-12"></div>
         <div ref="projectList" class="flex-col w-full justify-start mx-3 md:mx-12">
           <div class="w-full space-y-16">
             <!-- project list -->
             <div class="space-y-4">
-              <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40" ref="projectsTitle">Projects 💻</p>
+              <p :strength="5" class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40" ref="projectsTitle">Projects 💻</p>
               <project-card 
                 class="col-span-1"
                 name="FFmpeg Video Editor" 
@@ -78,7 +93,7 @@
                 :theme="theme"
               >
                 <template v-slot:thumbnailSlot>
-                  <img class="object-cover w-full h-full rounded" src="../assets/images/mcSwissPic.png" alt="Project Thumbnail">
+                  <img class="object-cover w-full h-full rounded max-w-sm" src="../assets/images/mcSwissPic.png" alt="Project Thumbnail">
                 </template>
                 <template v-slot:languageSlot>
                   <div class="badge badge-success">Vue 3</div>
@@ -92,7 +107,7 @@
                 :theme="theme"
               >
                 <template v-slot:thumbnailSlot>
-                  <img class="object-cover w-full h-full rounded" src="../assets/images/mcSwissPic.png" alt="Project Thumbnail">
+                  <img class="object-cover w-full h-full rounded max-w-sm" src="../assets/images/mcSwissPic.png" alt="Project Thumbnail">
                 </template>
                 <template v-slot:languageSlot>
                   <div class="badge bg-green-500 text-neutral border-none">Python</div>
@@ -102,7 +117,8 @@
 
             <!-- education list -->
             <div class="space-y-4">
-              <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40 text-secondary">Education 🎓</p>
+              <p :strength="5" class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-secondary">Education 🎓</p>
+
               <time-period-card 
                 class="col-span-1"
                 title="Bachelor of Applied Computer Science" 
@@ -114,7 +130,7 @@
 
             <!-- work experience list -->
             <div class="space-y-4">
-              <p :strength="5" class="header-bg font-extrabold text-5xl py-4 tracking-wider z-40 text-accent">Work Experience 📈</p>
+              <p :strength="5" class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-accent">Work Experience 📈</p>
               <time-period-card 
                 class="col-span-1"
                 title="Full Stack Software Developer" 
@@ -140,6 +156,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import gsap from 'gsap';
+import BioCard from '../components/cards/BioCard.vue';
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ParticleBackground from '../components/ParticleBackground.vue';
 import ProjectCard from '../components/cards/ProjectCard.vue';
@@ -147,7 +164,7 @@ import TimePeriodCard from '../components/cards/TimePeriodCard.vue';
 
 export default defineComponent({
   name: 'HomeView',
-  components: { TimePeriodCard, ParticleBackground, ProjectCard },
+  components: { BioCard, ParticleBackground, ProjectCard, TimePeriodCard },
   props: {
     theme: {
       type: String,
@@ -158,13 +175,15 @@ export default defineComponent({
     gsap.registerPlugin(ScrollTrigger);
   },
   data(){
-    return {}
+    return {
+      windowWidth: window.innerWidth as number
+    }
   },
   watch: {
     
   },
   mounted() {
-
+    window.addEventListener("resize", this.updateWindowSize);
     // fade header in on load
     gsap.from(this.$refs.headerDiv as any, { 
       delay: 0.5,
@@ -185,6 +204,12 @@ export default defineComponent({
 
     // slide name on scroll
     this.slideToAvatar();
+  },
+
+  computed: {
+    isMobile(): boolean {
+      return this.windowWidth < 1024;
+    }
   },
 
   methods: {
@@ -280,6 +305,11 @@ export default defineComponent({
         ease: 'power2.out',
       });
     },
+
+    updateWindowSize() {
+      this.windowWidth = window.innerWidth
+      console.log(window.innerWidth);
+    }
   }
 });
 </script>
