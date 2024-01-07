@@ -1,6 +1,6 @@
 <template>
   <kinesis-container>
-    <a href="#" :class="'flex flex-col card-bg items-center border border-base-100 rounded-lg shadow lg:flex-row lg:max-w-xl z-40 p-4 space-x-4 space-y-4' + (theme === 'coffee' ? ' coffee-card-bg' : ' night-card-bg')">
+    <a href="#" :class="'flex flex-col card-bg border border-base-100 rounded-lg shadow lg:flex-row lg:max-w-xl z-40 p-4 space-x-4 space-y-4' + (theme === 'coffee' ? ' coffee-card-bg' : ' night-card-bg')">
       <div class="leading-normal">
         <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ title }}</h5>
         <p class="mb-2 italic font-serif opacity-75"> {{ subtitle }}</p>
