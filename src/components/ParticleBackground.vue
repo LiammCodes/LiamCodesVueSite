@@ -1,24 +1,27 @@
 <template>
   <div ref="particleContainer" class="particle-container z-0" id="particle-container">
-    <div class="particle" v-for="(_, index) in particles" :key="index"></div>
+    <div class="particle" style="z-index: 0 !important;" v-for="(_, index) in particles" :key="index"></div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import gsap from 'gsap';
-// @ts-ignore
-import { KinesisContainer, KinesisElement } from 'vue-kinesis';
-
 
 export default defineComponent({
   name: 'ParticleBackground',
-  components: { KinesisContainer, KinesisElement },
+
   data() {
     return {
       particles: [] as HTMLDivElement[],
+      numParticles: this.isMobile ? 10 : 43 as number,
     }
   },
+
+  props: {
+    isMobile: Boolean
+  },
+
   mounted() {
     gsap.from(this.$refs.particleContainer as any, { 
       delay: 1.2,
@@ -28,15 +31,18 @@ export default defineComponent({
       ease: "black.out(1.7)"
     });
   },
+
   created() {
     // Create particles and add them to the array
-    for (let i = 0; i < 43; i++) {
+    for (let i = 0; i < this.numParticles; i++) {
       const particle = document.createElement('div') as HTMLDivElement;
       particle.className = 'particle';
       this.particles.push(particle);
     }
   },
+
   methods: {}
+
 });
 </script>
 

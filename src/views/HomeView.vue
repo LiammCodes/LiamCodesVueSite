@@ -5,11 +5,11 @@
       <div class="z-40">
         <div class="mx-6 md:mx-24">
           <div class="z-10">
-            <particle-background/>
+            <particle-background :is-mobile="isMobile"/>
           </div>
           <!-- hide on mobile to avoid animation weirdness -->
           <div v-if="!isMobile" class="h-screen flex items-center justify-center max-w-7xl mx-auto" ref="content">
-            <div ref="headerDiv" class="text-4xl md:text-5xl">
+            <div ref="headerDiv" class="text-4xl md:text-5xl header-bg">
               <div ref="hi">
                 <span class="font-extrabold py-1 tracking-wider">Hi! 👋</span>
               </div>
@@ -38,11 +38,11 @@
     <div v-if="isMobile" class="pt-32 pb-16">
       <div class="mx-3 md:mx-12">
         <div class="w-full flex justify-center pb-14">
-          <div class="z-40 pr-5 w-60">
+          <div class="pr-5 w-60">
             <img class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
           </div>
           <div class="py-2 text-lg tracking-wider flex items-center">
-            <div>
+            <div class="header-bg">
               <span class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-focus">Liam Moore</span>
               <div class="font-bold pl-1">
                 <div>Fullstack Software Developer</div>
@@ -180,7 +180,12 @@ export default defineComponent({
     }
   },
   watch: {
-    
+    windowWidth(oldVal: number, newVal: number) {
+      if (oldVal < 1024 && newVal >= 1024 || oldVal >= 1024 && newVal < 1024){
+        location.reload()
+      }
+      console.log(oldVal + ' ---> ' + newVal)
+    }
   },
   mounted() {
     window.addEventListener("resize", this.updateWindowSize);
@@ -308,7 +313,6 @@ export default defineComponent({
 
     updateWindowSize() {
       this.windowWidth = window.innerWidth
-      console.log(window.innerWidth);
     }
   }
 });
