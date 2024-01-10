@@ -1,6 +1,6 @@
 <template>
   <kinesis-container>
-    <a href="#" :class="'flex card-bg items-center border border-base-100 rounded-lg shadow flex-row z-40 p-2 space-x-4 space-y-4' + (theme === 'coffee' ? ' coffee-card-bg' : ' night-card-bg')">
+    <a href="#" :class="'flex card-bg items-center border shadow-lg rounded-lg flex-row z-40 p-2 space-x-4 space-y-4 night-card-bg' + (theme === 'winter' ? ' border-gray-400' : ' border-zinc-900')">
       <kinesis-element :strength="5" class="lg:w-1/3 card-img">
         <slot name="thumbnailSlot"></slot>
       </kinesis-element>

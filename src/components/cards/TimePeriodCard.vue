@@ -1,6 +1,6 @@
 <template>
   <kinesis-container>
-    <a href="#" :class="'flex flex-col card-bg border border-base-100 rounded-lg shadow lg:flex-row lg:max-w-xl z-40 p-4 space-x-4 space-y-4' + (theme === 'coffee' ? ' coffee-card-bg' : ' night-card-bg')">
+    <a href="#" :class="'flex flex-col card-bg border border-base-100 rounded-lg shadow-lg lg:flex-row lg:max-w-xl z-40 p-4 space-x-4 space-y-4 card-bg' + (theme === 'winter' ? ' border-gray-300' : ' border-zinc-900')">
       <div class="leading-normal">
         <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ title }}</h5>
         <p class="mb-2 italic font-serif opacity-75"> {{ subtitle }}</p>
@@ -61,12 +61,8 @@ export default defineComponent({
   transition: 0.3s;
 }
 
-.night-card-bg:hover {
+.card-bg:hover {
   // background: rgba(33, 23, 32, 0.9);
   background: rgba(130, 141, 248, 0.1);
-}
-
-.coffee-card-bg:hover {
-  background: rgba(33, 23, 32, 0.5);
 }
 </style>

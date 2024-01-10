@@ -51,7 +51,7 @@
             </div>
           </div>
         </div>
-        <bio-card/>
+        <bio-card :theme="theme"/>
       </div>
     </div>
 
@@ -65,7 +65,7 @@
               <img class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
             </div>
             <div ref="bio" class="w-full">
-              <bio-card/>
+              <bio-card :theme="theme"/>
             </div>
           </div>
         </div>
