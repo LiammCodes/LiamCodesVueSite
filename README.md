@@ -4,5 +4,5 @@ This website was built using Vue 3, TypeScript, TailwindCSS, and DaisyUI. It use
 
 ## Usage
 
-To run on your local machine, pull and run `npm'
+To run on your local machine, pull and run `npm`
 then run `npm run dev`
