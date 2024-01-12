@@ -58,12 +58,7 @@ export default defineComponent({
   transition: 0.3s;
 }
 
-.night-card-bg:hover {
-  // background: rgba(33, 23, 32, 0.9);
+.card-bg:hover {
   background: rgba(130, 141, 248, 0.1);
-}
-
-.coffee-card-bg:hover {
-  background: rgba(33, 23, 32, 0.5);
 }
 </style>

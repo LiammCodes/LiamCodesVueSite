@@ -1,18 +1,35 @@
 <template>
-  <div :class="'px-5 pb-4 pt-2 border rounded-lg shadow-md lg:flex-row mb-4 card-bg z-40' + (theme === 'winter' ? ' border-gray-300' : ' border-zinc-900')" >
+  <div :class="'px-5 pb-4 pt-2 border rounded-lg shadow-md lg:flex-row mb-4 bio-card-bg z-40' + (theme === 'winter' ? ' border-gray-300' : ' border-zinc-900')" >
     <h5 class="font-extrabold text-xl py-1 tracking-wider text-secondary">TLDR</h5>
     <p class="pb-2">
       I'm a software developer from Nova Scotia Canada specializing in UI/UX design and development.
-      Currently working full time as a Full Stack developer with Vue3, TypeScript and Quasar. 
+      Currently working full time as a Full Stack developer with Vue 3, TypeScript and Quasar. 
     </p>
   </div>
+  <div class="flex flex-col lg:flex-row lg:space-x-3">
+    <a role="button" href="https://github.com/LiammCodes" target="_blank" class="btn btn-outline bio-card-bg text-orange-600 bg-orange-600 bg-opacity-10 hover:bg-orange-500 hover:border-orange-600 grow mb-4">
+      <font-awesome-icon :icon="['fab', 'github']" size="xl" />
+      Github
+    </a>
+    <a role="button" href="https://instagram.com/liammoore99" target="_blank" class="btn btn-outline bio-card-bg text-pink-600 bg-pink-600 bg-opacity-10 hover:bg-pink-500 hover:border-pink-600 grow mb-4">
+      <font-awesome-icon :icon="['fab', 'instagram']" size="xl" />
+      Instagram
+    </a>
+    <a role="button" href="https://twitch.tv/liama6" target="_blank" class="btn btn-outline bio-card-bg text-purple-600 bg-purple-600 bg-opacity-10 hover:bg-purple-500 hover:border-purple-600 grow mb-4">
+      <font-awesome-icon :icon="['fab', 'twitch']" size="xl" />
+      Twitch
+    </a>
+  </div>
+
 </template>
 <script lang="ts">
 
 import { defineComponent } from 'vue';
+import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 export default defineComponent({
   name: 'BioCard',
+  components: { faInstagram },
   props: {
     theme: String
   }
@@ -21,7 +38,7 @@ export default defineComponent({
 </script>
 
 <style>
-.card-bg {
+.bio-card-bg {
   z-index: 100;
   background: rgba(58,190,247,0);
   backdrop-filter: blur(10px);
