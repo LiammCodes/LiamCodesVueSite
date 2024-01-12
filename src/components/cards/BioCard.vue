@@ -39,7 +39,6 @@ export default defineComponent({
 
 <style>
 .bio-card-bg {
-  z-index: 100;
   background: rgba(58,190,247,0);
   backdrop-filter: blur(10px);
 }
