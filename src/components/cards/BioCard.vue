@@ -7,7 +7,9 @@
     </p>
   </div>
   <div class="flex flex-col lg:flex-row lg:space-x-3">
-    <a role="button" href="https://github.com/LiammCodes" target="_blank" class="btn btn-outline bio-card-bg text-orange-600 bg-orange-600 bg-opacity-10 hover:bg-orange-500 hover:border-orange-600 grow mb-4">
+    <a role="button" href="https://github.com/LiammCodes" target="_blank" 
+        :class="'btn btn-outline bio-card-bg bg-opacity-10 grow mb-4 btn-default bg-gray-500'"
+      >
       <font-awesome-icon :icon="['fab', 'github']" size="xl" />
       Github
     </a>
