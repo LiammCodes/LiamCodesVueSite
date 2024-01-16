@@ -114,19 +114,6 @@
               </project-card>
             </div>
 
-            <!-- education list -->
-            <div class="space-y-4">
-              <p :strength="5" class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-secondary">Education 🎓</p>
-
-              <time-period-card 
-                class="col-span-1"
-                title="Bachelor of Applied Computer Science" 
-                dateRange="2017 - 2022" 
-                subtitle="Dalhousie University"
-                :theme="theme"
-              />
-            </div>
-
             <!-- work experience list -->
             <div class="space-y-4">
               <p :strength="5" class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-accent">Work Experience 📈</p>
@@ -145,6 +132,20 @@
                 :theme="theme"
               />
             </div>
+
+            <!-- education list -->
+            <div class="space-y-4">
+              <p :strength="5" class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-secondary">Education 🎓</p>
+
+              <time-period-card 
+                class="col-span-1"
+                title="Bachelor of Applied Computer Science" 
+                dateRange="2017 - 2022" 
+                subtitle="Dalhousie University"
+                :theme="theme"
+              />
+            </div>
+            
           </div>
         </div>
       </div>
