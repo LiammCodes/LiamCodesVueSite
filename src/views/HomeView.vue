@@ -65,6 +65,8 @@
             </div>
             <div ref="bio" class="w-full">
               <bio-card :theme="theme"/>
+              <!-- project modal -->
+              <project-modal :show-modal="showModal" />          
             </div>
           </div>
         </div>
@@ -74,21 +76,21 @@
 
     <!-- CONTENT -->
     <div class="max-w-7xl mx-auto">
-      
+
       <!-- NON fixed div for scrolling page content -->
       <div v-if="!isMobile" class="h-screen"></div>
+    
       <div class="flex">
         <div class="hidden lg:block flex-col w-full mx-3 md:mx-12"></div>
         <div ref="projectList" class="flex-col w-full justify-start mx-3 md:mx-12">
           <div class="w-full space-y-16">
             <!-- project list -->
             <div class="space-y-4">
-              <p :strength="5" class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40" ref="projectsTitle">Projects 💻</p>
+              <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40" ref="projectsTitle">Projects 💻</p>
               <project-card 
+                @clicked="obj => handleProjectClicked(obj)"
                 class="col-span-1"
-                name="FFmpeg Video Editor" 
-                description="A video editing toolbox with features such as segment, preview, and thumbnail generation." 
-                img-path="../../assets/images/mcSwissPic.png"
+                :projectData="projects[0]"
                 :theme="theme"
               >
                 <template v-slot:thumbnailSlot>
@@ -101,8 +103,7 @@
               </project-card>
               <project-card 
                 class="col-span-1" 
-                name="Song Request Chat Bot" 
-                description="A chat bot for Twitch that allows users to queue songs to a streamers Spotify playlist."
+                :projectData="projects[1]"
                 :theme="theme"
               >
                 <template v-slot:thumbnailSlot>
@@ -116,7 +117,7 @@
 
             <!-- work experience list -->
             <div class="space-y-4">
-              <p :strength="5" class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-accent">Work Experience 📈</p>
+              <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-accent">Work Experience 📈</p>
               <time-period-card 
                 class="col-span-1"
                 title="Full Stack Software Developer" 
@@ -135,8 +136,7 @@
 
             <!-- education list -->
             <div class="space-y-4">
-              <p :strength="5" class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-secondary">Education 🎓</p>
-
+              <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-secondary">Education 🎓</p>
               <time-period-card 
                 class="col-span-1"
                 title="Bachelor of Applied Computer Science" 
@@ -155,16 +155,19 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+// @ts-ignore
+import { ProjectData, TimePeriodData } from '../../types/types';
 import gsap from 'gsap';
 import BioCard from '../components/cards/BioCard.vue';
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ParticleBackground from '../components/ParticleBackground.vue';
 import ProjectCard from '../components/cards/ProjectCard.vue';
 import TimePeriodCard from '../components/cards/TimePeriodCard.vue';
+import ProjectModal from '../components/modals/ProjectModal.vue';
 
 export default defineComponent({
   name: 'HomeView',
-  components: { BioCard, ParticleBackground, ProjectCard, TimePeriodCard },
+  components: { BioCard, ParticleBackground, ProjectCard, ProjectModal, TimePeriodCard },
   props: {
     theme: {
       type: String,
@@ -176,7 +179,41 @@ export default defineComponent({
   },
   data(){
     return {
-      windowWidth: window.innerWidth as number
+      projects: [
+        {
+          name: "FFmpeg Video Editor", 
+          description: "A video editing toolbox with features such as segment, preview, and thumbnail generation.",
+          longDescription: ""
+        } as ProjectData,
+        {
+          name: "Song Request Chat Bot",
+          description: "A chat bot for Twitch that allows users to queue songs to a streamers Spotify playlist.",
+          longDescription: ""
+        } as ProjectData,
+      ] as ProjectData[],
+      showModal: false as boolean,
+      timePeriods: {
+        work: [
+          {
+            title: "Full Stack Software Developer",
+            dateRange: "2022 - Present",
+            subtitle: "Praxes Medical Group"
+          } as TimePeriodData,
+          {
+            title: "Assistant Platform Development Manager",
+            dateRange: "2019 - 2022",
+            subtitle: "McIntyre Media Inc."
+          } as TimePeriodData,
+        ] as TimePeriodData[],
+        education: [
+          {
+            title: "Bachelor of Applied Computer Science" ,
+            dateRange: "2017 - 2022" ,
+            subtitle: "Dalhousie University"
+          } as TimePeriodData,
+        ] as TimePeriodData[],
+      } as Object,
+      windowWidth: window.innerWidth as number,
     }
   },
   watch: {
@@ -184,7 +221,6 @@ export default defineComponent({
       if (oldVal < 1024 && newVal >= 1024 || oldVal >= 1024 && newVal < 1024){
         location.reload()
       }
-      console.log(oldVal + ' ---> ' + newVal)
     }
   },
   mounted() {
@@ -236,6 +272,11 @@ export default defineComponent({
       });
     },
 
+    handleProjectClicked(obj: any) {
+      // this.showModal = true;
+      console.log(obj)
+    },
+
     headerFade(ref: HTMLElement) {
       gsap.to(ref as HTMLElement, {
         scrollTrigger: {
@@ -246,37 +287,6 @@ export default defineComponent({
         duration: 0.5,
         autoAlpha: 0,
         ease: "black.out(1.7)"
-      });
-    },
-
-    slideToAvatar() {
-      const avatar = this.$refs.avatar as HTMLElement;
-      const name = this.$refs.name as HTMLElement
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: this.$refs.projectsTitle as HTMLElement,
-          end: "bottom center",
-          toggleActions: "restart none reverse reverse",
-          scrub: true,
-          invalidateOnRefresh: true,
-        },
-      }).to(name as HTMLElement, {
-        x: () => {
-          // Calculate the target X position based on the avatar position
-          const avatarRect = avatar.getBoundingClientRect();
-          const nameRect = name.getBoundingClientRect();
-          return avatarRect.right - nameRect.left;
-        },
-        y: () => {
-          // Calculate the target Y position based on the avatar position
-          const avatarRect = avatar.getBoundingClientRect();
-          const nameRect = name.getBoundingClientRect();
-          // Calculate the middle of the avatar
-          const avatarMiddleY = (avatarRect.top + avatarRect.bottom) / 2;
-
-          // Set the target Y position to align the middle of the name with the middle of the avatar
-          return avatarMiddleY - nameRect.bottom;
-        },
       });
     },
 
@@ -308,6 +318,37 @@ export default defineComponent({
         delay: 0,
         duration: 0.5,
         ease: 'power2.out',
+      });
+    },
+
+    slideToAvatar() {
+      const avatar = this.$refs.avatar as HTMLElement;
+      const name = this.$refs.name as HTMLElement
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: this.$refs.projectsTitle as HTMLElement,
+          end: "bottom center",
+          toggleActions: "restart none reverse reverse",
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      }).to(name as HTMLElement, {
+        x: () => {
+          // Calculate the target X position based on the avatar position
+          const avatarRect = avatar.getBoundingClientRect();
+          const nameRect = name.getBoundingClientRect();
+          return avatarRect.right - nameRect.left;
+        },
+        y: () => {
+          // Calculate the target Y position based on the avatar position
+          const avatarRect = avatar.getBoundingClientRect();
+          const nameRect = name.getBoundingClientRect();
+          // Calculate the middle of the avatar
+          const avatarMiddleY = (avatarRect.top + avatarRect.bottom) / 2;
+
+          // Set the target Y position to align the middle of the name with the middle of the avatar
+          return avatarMiddleY - nameRect.bottom;
+        },
       });
     },
 
