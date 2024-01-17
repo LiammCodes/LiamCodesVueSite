@@ -120,7 +120,7 @@
               <time-period-card 
                 class="col-span-1"
                 title="Full Stack Software Developer" 
-                dateRange="2022 - present" 
+                dateRange="2022 - Present" 
                 subtitle="Praxes Medical Group"
                 :theme="theme"
               />
@@ -145,7 +145,7 @@
                 :theme="theme"
               />
             </div>
-            
+
           </div>
         </div>
       </div>
