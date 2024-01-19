@@ -62,15 +62,16 @@
               <img class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
             </div>
             <div ref="bio" class="w-full">
-              <bio-card :theme="theme"/>
-              <!-- project modal -->
-              <project-modal :show-modal="showModal" />          
+              <bio-card :theme="theme"/>       
             </div>
           </div>
         </div>
         <div class="hidden lg:block flex-col w-full mx-3 md:mx-12"></div>
       </div>
     </div>
+
+    <!-- project modal -->
+    <project-modal :show-modal="showModal" />   
 
     <!-- CONTENT -->
     <div class="max-w-7xl mx-auto">

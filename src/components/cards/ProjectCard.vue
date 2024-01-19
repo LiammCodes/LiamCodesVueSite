@@ -41,12 +41,10 @@ export default defineComponent({
       ],
     }
   },
-  mounted() {
-    // console.log(this.thumbnailArr);
-  },
+  mounted() {},
   methods: {
     handleClick() {
-      this.$emit('clicked', this.projectData)
+      // this.$emit('clicked', this.projectData)
     }
   },
 });
