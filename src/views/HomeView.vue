@@ -2,32 +2,30 @@
   <div class="w-full">
     <!-- fixed div for hero and particle bg -->
     <div class="w-full fixed">
-      <div class="z-40">
-        <div class="mx-6 md:mx-24">
-          <div class="z-10">
-            <particle-background :is-mobile="isMobile"/>
-          </div>
-          <!-- hide on mobile to avoid animation weirdness -->
-          <div v-if="!isMobile" class="h-screen flex items-center justify-center max-w-7xl mx-auto" ref="content">
-            <div ref="headerDiv" class="text-4xl md:text-5xl header-bg">
-              <div ref="hi">
-                <span class="font-extrabold py-1 tracking-wider">Hi! 👋</span>
-              </div>
-              <div class="font-extrabold py-1 tracking-wider">
-                <span ref="im">I'm </span>
-                <div ref="name" class="inline-block">
-                  <span class="text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-focus">Liam Moore</span>
-                  <div ref="subName" class="absolute pl-1">
-                    <div class="font-bold py-2 text-lg tracking-wider">
-                      <div>Fullstack Software Developer</div>
-                      <div>NS, Canada</div>
-                    </div>
+      <div class="mx-6 md:mx-24">
+        
+        <particle-background :is-mobile="isMobile"/>
+        
+        <!-- hide on mobile to avoid animation weirdness -->
+        <div v-if="!isMobile" class="h-screen flex items-center justify-center max-w-7xl mx-auto" ref="content">
+          <div ref="headerDiv" class="text-4xl md:text-5xl header-bg">
+            <div ref="hi">
+              <span class="font-extrabold py-1 tracking-wider">Hi! 👋</span>
+            </div>
+            <div class="font-extrabold py-1 tracking-wider">
+              <span ref="im">I'm </span>
+              <div ref="name" class="inline-block">
+                <span class="text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-focus">Liam Moore</span>
+                <div ref="subName" class="absolute pl-1">
+                  <div class="font-bold py-2 text-lg tracking-wider">
+                    <div>Fullstack Software Developer</div>
+                    <div>NS, Canada</div>
                   </div>
                 </div>
               </div>
-              <div ref="title">
-                <span class="font-extrabold tracking-wider">A Fullstack Software Developer</span>
-              </div>
+            </div>
+            <div ref="title">
+              <span class="font-extrabold tracking-wider">A Fullstack Software Developer</span>
             </div>
           </div>
         </div>
@@ -273,7 +271,7 @@ export default defineComponent({
     },
 
     handleProjectClicked(obj: any) {
-      // this.showModal = true;
+      this.showModal = true;
       console.log(obj)
     },
 
