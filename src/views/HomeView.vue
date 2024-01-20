@@ -71,7 +71,7 @@
     </div>
 
     <!-- project modal -->
-    <project-modal :show-modal="showModal" />   
+    <project-modal :show-modal="showModal" @modal-closed="showModal = false" />   
 
     <!-- CONTENT -->
     <div class="max-w-7xl mx-auto">
@@ -273,6 +273,8 @@ export default defineComponent({
 
     handleProjectClicked(obj: any) {
       this.showModal = true;
+      console.log(this.showModal)
+      // add esc key listener
       console.log(obj)
     },
 
