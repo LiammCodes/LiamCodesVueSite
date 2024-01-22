@@ -1,7 +1,6 @@
 <template>
   <!-- You can open the modal using ID.showModal() method -->
-  <!-- <button class="btn" onclick="my_modal_3.showModal()">open modal</button> -->
-  <dialog ref="projectModal" class="modal" :class="{ 'modal-open': showModal }" @keydown.esc="handleModalClose">
+  <dialog ref="projectModal" class="modal" :class="{ 'modal-open': showModal }">
     <div class="modal-box">
       <form method="dialog">
         <button @click="handleModalClose" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
@@ -10,7 +9,6 @@
       <p class="py-4">Press ESC key or click on ✕ button to close</p>
     </div>
   </dialog>
-
 </template>
 
 <script lang="ts">
@@ -22,7 +20,7 @@ export default defineComponent({
   },
   data() {
     return {
-      modalIsOpen: this.showModal as boolean
+      modalIsOpen: this.showModal as boolean,
     }
   },
   mounted() {

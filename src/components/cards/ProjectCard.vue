@@ -44,7 +44,8 @@ export default defineComponent({
   mounted() {},
   methods: {
     handleClick() {
-      // this.$emit('clicked', this.projectData);
+      // this.$emit('clicked');
+      // console.log(this.projectData)
     }
   },
 });

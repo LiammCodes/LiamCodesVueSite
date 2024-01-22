@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-full outline-none" tabindex="0" @keydown.esc="handleModalClose">
     <!-- fixed div for hero and particle bg -->
     <div class="w-full fixed">
       <div class="mx-6 md:mx-24">
@@ -71,7 +71,7 @@
     </div>
 
     <!-- project modal -->
-    <project-modal :show-modal="showModal" @modal-closed="showModal = false" />   
+    <project-modal :show-modal="showModal" @modal-closed="showModal = false" :project-data="modalData" />   
 
     <!-- CONTENT -->
     <div class="max-w-7xl mx-auto">
@@ -87,9 +87,9 @@
             <div class="space-y-4">
               <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40" ref="projectsTitle">Projects 💻</p>
               <project-card 
-                @clicked="obj => handleProjectClicked(obj)"
+                @clicked="handleProjectClicked(projects[0])"
                 class="col-span-1"
-                :projectData="projects[0]"
+                :projectData="projects[0]" 
                 :theme="theme"
               >
                 <template v-slot:thumbnailSlot>
@@ -178,6 +178,7 @@ export default defineComponent({
   },
   data(){
     return {
+      modalData: null as null | ProjectData,
       projects: [
         {
           name: "FFmpeg Video Editor", 
@@ -271,11 +272,13 @@ export default defineComponent({
       });
     },
 
-    handleProjectClicked(obj: any) {
+    handleModalClose() {
+      this.showModal = false;
+    },
+
+    handleProjectClicked(data: ProjectData) {
       this.showModal = true;
-      console.log(this.showModal)
-      // add esc key listener
-      console.log(obj)
+      this.modalData = data;
     },
 
     headerFade(ref: HTMLElement) {
