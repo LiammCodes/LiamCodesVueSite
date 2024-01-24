@@ -1,7 +1,8 @@
 export interface ProjectData {
   name: string,
   description: string,
-  longDescription: string
+  longDescription: string,
+  imgPath: URL,
 }
 
 export interface TimePeriodData {

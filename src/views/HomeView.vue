@@ -71,7 +71,11 @@
     </div>
 
     <!-- project modal -->
-    <project-modal :show-modal="showModal" @modal-closed="showModal = false" :project-data="modalData" />   
+    <project-modal :show-modal="showModal" @modal-closed="showModal = false" :project-data="modalData">
+      <template v-slot:imgSlot>
+        <img class="object-cover w-full h-full rounded max-w-sm" :src="projects[0].imgPath" alt="Project Thumbnail">
+      </template>
+    </project-modal>  
 
     <!-- CONTENT -->
     <div class="max-w-7xl mx-auto">
@@ -173,17 +177,18 @@ export default defineComponent({
       required: true
     },
   },
-  setup(){
+  setup() {
     gsap.registerPlugin(ScrollTrigger);
   },
-  data(){
+  data() {
     return {
       modalData: null as null | ProjectData,
       projects: [
         {
           name: "FFmpeg Video Editor", 
           description: "A video editing toolbox with features such as segment, preview, and thumbnail generation.",
-          longDescription: ""
+          longDescription: "",
+          imgPath: new URL(`../assets/images/mcSwissPic.png`, import.meta.url).href,
         } as ProjectData,
         {
           name: "Song Request Chat Bot",
