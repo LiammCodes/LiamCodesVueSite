@@ -27,11 +27,9 @@
 <script lang="ts">
 
 import { defineComponent } from 'vue';
-import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 export default defineComponent({
   name: 'BioCard',
-  components: { faInstagram },
   props: {
     theme: String
   }
