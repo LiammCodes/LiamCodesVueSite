@@ -7,32 +7,37 @@
     </p>
   </div>
   <div class="flex flex-col lg:flex-row lg:space-x-3">
-    <a role="button" href="https://github.com/LiammCodes" target="_blank" 
-        :class="'btn btn-outline bio-card-bg bg-opacity-10 grow mb-4 btn-default bg-gray-500'"
-      >
-      <font-awesome-icon :icon="['fab', 'github']" size="xl" />
-      Github
-    </a>
-    <a role="button" href="https://instagram.com/liammoore99" target="_blank" class="btn btn-outline bio-card-bg text-pink-600 bg-pink-600 bg-opacity-10 hover:bg-pink-500 hover:border-pink-600 grow mb-4">
-      <font-awesome-icon :icon="['fab', 'instagram']" size="xl" />
-      Instagram
-    </a>
-    <a role="button" href="https://twitch.tv/liama6" target="_blank" class="btn btn-outline bio-card-bg text-purple-600 bg-purple-600 bg-opacity-10 hover:bg-purple-500 hover:border-purple-600 grow mb-4">
-      <font-awesome-icon :icon="['fab', 'twitch']" size="xl" />
-      Twitch
-    </a>
+    <link-button 
+      text="Github" 
+      :icon="['fab', 'github']"
+      customClassList="btn-default bg-gray-500"
+      link="https://github.com/LiammCodes"
+    />
+    <link-button 
+      text="Instagram" 
+      color="pink"
+      :icon="['fab', 'instagram']"
+      link="https://instagram.com/liammoore99"
+    />
+    <link-button 
+      text="Twitch" 
+      color="purple"
+      :icon="['fab', 'twitch']"
+      link="https://twitch.tv/liama6"
+    />
   </div>
-
 </template>
 <script lang="ts">
 
 import { defineComponent } from 'vue';
+import LinkButton from '../buttons/LinkButton.vue';
 
 export default defineComponent({
   name: 'BioCard',
   props: {
     theme: String
-  }
+  },
+  components: { LinkButton }
 });
 
 </script>
