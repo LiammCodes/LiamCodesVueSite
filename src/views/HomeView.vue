@@ -97,7 +97,7 @@
                 :theme="theme"
               >
                 <template v-slot:thumbnailSlot>
-                  <img class="object-cover w-full h-full rounded max-w-sm" src="../assets/images/mcSwissPic.png" alt="Project Thumbnail">
+                  <img class="object-cover w-full h-full rounded max-w-sm" :src="projects[0].imgPath" alt="Project Thumbnail">
                 </template>
                 <template v-slot:languageSlot>
                   <div class="badge badge-success">Vue 3</div>
@@ -110,7 +110,7 @@
                 :theme="theme"
               >
                 <template v-slot:thumbnailSlot>
-                  <img class="object-cover w-full h-full rounded max-w-sm" src="../assets/images/mcSwissPic.png" alt="Project Thumbnail">
+                  <img class="object-cover w-full h-full rounded max-w-sm" :src="projects[1].imgPath" alt="Project Thumbnail">
                 </template>
                 <template v-slot:languageSlot>
                   <div class="badge bg-green-500 text-neutral border-none">Python</div>
@@ -193,7 +193,8 @@ export default defineComponent({
         {
           name: "Song Request Chat Bot",
           description: "A chat bot for Twitch that allows users to queue songs to a streamers Spotify playlist.",
-          longDescription: ""
+          longDescription: "",
+          imgPath: new URL(`../assets/images/twitchBotPic.png`, import.meta.url).href,
         } as ProjectData,
       ] as ProjectData[],
       showModal: false as boolean,
