@@ -43,14 +43,12 @@
 <script lang="ts">
 
 import { defineComponent } from 'vue';
-import LinkButton from '../buttons/LinkButton.vue';
 
 export default defineComponent({
   name: 'BioCard',
   props: {
     theme: String
   },
-  components: { LinkButton }
 });
 
 </script>
