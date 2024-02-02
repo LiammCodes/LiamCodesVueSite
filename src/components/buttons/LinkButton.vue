@@ -1,9 +1,10 @@
 <template>
   <a 
+    ref="button"
     role="button" 
     :href="link" 
     target="_blank" 
-    :class="`btn btn-outline btn-bg bg-opacity-10 grow mb-4 ${buttonClasses}`"    
+    class="btn btn-outline btn-bg bg-opacity-10 grow mb-4"    
   >
     <font-awesome-icon :icon="icon" size="xl" />
     {{ text }}
@@ -38,12 +39,19 @@ export default defineComponent({
       required: true
     },
   },
-  computed: {
-    buttonClasses(): string {
-      if (this.customClassList == "") {
-        return `btn btn-outline grow mb-4 btn-bg text-${this.color}-600 bg-${this.color}-600 bg-opacity-10 hover:bg-${this.color}-500 hover:border-${this.color}-600`;
+  data() {},
+  computed: {},
+  mounted() {
+    this.setClasses();
+  },
+  methods: {
+    setClasses(): void {
+      let buttonRef = this.$refs['button'] as HTMLElement;
+      let buttonClasses = buttonRef.classList as DOMTokenList;
+      if (!this.customClassList) {
+        buttonClasses.add(`text-${this.color}-600`, `bg-${this.color}-600`, `hover:bg-${this.color}-500`, `hover:border-${this.color}-600`);
       } else {
-        return "btn-default bg-gray-500";
+        buttonClasses.add("btn-default", "bg-gray-500")
       }
     }
   }
