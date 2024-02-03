@@ -1,8 +1,14 @@
+export interface Language {
+  name: string;
+  style: string;
+}
+
 export interface ProjectData {
-  name: string,
-  description: string,
-  longDescription: string,
-  imgPath: URL,
+  name: string;
+  description: string;
+  longDescription: string;
+  imgPath: string;
+  languages: Language[];
 }
 
 export interface TimePeriodData {
@@ -10,3 +16,9 @@ export interface TimePeriodData {
   subtitle: string,
   dateRange: string,
 }
+
+export interface TimePeriods {
+  work: TimePeriodData,
+  education: TimePeriodData
+}
+

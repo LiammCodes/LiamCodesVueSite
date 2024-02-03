@@ -90,49 +90,26 @@
             <!-- project list -->
             <div class="space-y-4">
               <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40" ref="projectsTitle">Projects 💻</p>
-              <project-card 
-                @clicked="handleProjectClicked(projects[0])"
+              <project-card
+                v-for="(project, index) in projects"
+                :key="index"
                 class="col-span-1"
-                :projectData="projects[0]" 
+                @clicked="handleProjectClicked(project)"
+                :projectData="project"
                 :theme="theme"
-              >
-                <template v-slot:thumbnailSlot>
-                  <img class="object-cover w-full h-full rounded max-w-sm" :src="projects[0].imgPath" alt="Project Thumbnail">
-                </template>
-                <template v-slot:languageSlot>
-                  <div class="badge badge-success">Vue 3</div>
-                  <div class="badge badge-info">TypeScript</div>
-                </template>
-              </project-card>
-              <project-card 
-                class="col-span-1" 
-                :projectData="projects[1]"
-                :theme="theme"
-              >
-                <template v-slot:thumbnailSlot>
-                  <img class="object-cover w-full h-full rounded max-w-sm" :src="projects[1].imgPath" alt="Project Thumbnail">
-                </template>
-                <template v-slot:languageSlot>
-                  <div class="badge bg-green-500 text-neutral border-none">Python</div>
-                </template>
-              </project-card>
+              />
             </div>
 
             <!-- work experience list -->
             <div class="space-y-4">
               <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-accent">Work Experience 📈</p>
               <time-period-card 
+                v-for="(work, index) in (timePeriods.work as TimePeriodData[])"
+                :key="index"
                 class="col-span-1"
-                title="Full Stack Software Developer" 
-                dateRange="2022 - Present" 
-                subtitle="Praxes Medical Group"
-                :theme="theme"
-              />
-              <time-period-card 
-                class="col-span-1"
-                title="Assistant Platform Development Manager" 
-                dateRange="2019 - 2022" 
-                subtitle="McIntyre Media Inc."
+                :title="work.title" 
+                :dateRange="work.dateRange" 
+                :subtitle="work.subtitle"
                 :theme="theme"
               />
             </div>
@@ -141,10 +118,12 @@
             <div class="space-y-4">
               <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-secondary">Education 🎓</p>
               <time-period-card 
+                v-for="(education, index) in (timePeriods.education as TimePeriodData[])"
+                :key="index"
                 class="col-span-1"
-                title="Bachelor of Applied Computer Science" 
-                dateRange="2017 - 2022" 
-                subtitle="Dalhousie University"
+                :title="education.title" 
+                :dateRange="education.dateRange" 
+                :subtitle="education.subtitle"
                 :theme="theme"
               />
             </div>
@@ -159,7 +138,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 // @ts-ignore
-import { ProjectData, TimePeriodData } from '../../types/types';
+import { ProjectData, TimePeriodData, TimePeriods } from '../../types/types';
 import gsap from 'gsap';
 import BioCard from '../components/cards/BioCard.vue';
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -189,12 +168,19 @@ export default defineComponent({
           description: "A video editing toolbox with features such as segment, preview, and thumbnail generation.",
           longDescription: "",
           imgPath: new URL(`../assets/images/mcSwissPic.png`, import.meta.url).href,
+          languages: [
+            { name: 'Vue 3', style: 'badge badge-success' },
+            { name: 'TypeScript', style: 'badge badge-info' },
+          ],
         } as ProjectData,
         {
           name: "Song Request Chat Bot",
           description: "A chat bot for Twitch that allows users to queue songs to a streamers Spotify playlist.",
           longDescription: "",
           imgPath: new URL(`../assets/images/twitchBotPic.png`, import.meta.url).href,
+          languages: [
+            { name: 'Python', style: 'badge bg-green-500 text-neutral border-none' },
+          ],
         } as ProjectData,
       ] as ProjectData[],
       showModal: false as boolean,
@@ -218,7 +204,7 @@ export default defineComponent({
             subtitle: "Dalhousie University"
           } as TimePeriodData,
         ] as TimePeriodData[],
-      } as Object,
+      } as TimePeriods,
       windowWidth: window.innerWidth as number,
     }
   },

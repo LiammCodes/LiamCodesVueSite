@@ -2,13 +2,19 @@
   <kinesis-container @click="handleClick">
     <div :class="'flex card-bg items-center border shadow-md rounded-lg flex-row p-2 space-x-4 space-y-4 night-card-bg cursor-pointer' + (theme === 'winter' ? ' border-gray-300' : ' border-zinc-900')">
       <kinesis-element :strength="5" class="lg:w-1/3 card-img">
-        <slot name="thumbnailSlot"></slot>
+        <img class="object-cover w-full h-full rounded max-w-sm" :src="projectData.imgPath" alt="Project Thumbnail">
       </kinesis-element>
       <div class="flex flex-col justify-between leading-normal lg:w-2/3">
         <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ projectData.name }}</h5>
         <p class="mb-2 font-normal">{{ projectData.description }}</p>
         <div class="row space-x-2 mb-2">
-          <slot name="languageSlot"></slot>
+          <div
+            v-for="(language, index) in projectData.languages"
+            :class="language.style"
+            :key="index"
+          >
+          {{ language.name }}
+          </div>
         </div>
       </div>
     </div>
