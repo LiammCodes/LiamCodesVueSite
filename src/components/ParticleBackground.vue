@@ -14,7 +14,7 @@ export default defineComponent({
   data() {
     return {
       particles: [] as HTMLDivElement[],
-      numParticles: this.isMobile ? 10 : 43 as number,
+      numParticles: this.isMobile ? 10 : 20 as number,
     }
   },
 
@@ -57,7 +57,7 @@ export default defineComponent({
   /* Add other styling as needed */
 }
 
-@for $i from 1 through 30 {
+@for $i from 1 through 50 {
 	@keyframes particle-animation-#{$i} {
     $x: random(90) * 1vw;
     $y: random(90) * 1vh;

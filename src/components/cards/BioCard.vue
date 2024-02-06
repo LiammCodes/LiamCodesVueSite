@@ -7,7 +7,6 @@
     </p>
   </div>
   <div class="flex flex-col lg:flex-row lg:space-x-3">
-
     <a 
       role="button" 
       href="https://github.com/LiammCodes" 
@@ -17,7 +16,6 @@
       <font-awesome-icon :icon="['fab', 'github']" size="xl" />
       Github
     </a>
-
     <a 
       role="button" 
       href="https://instagram.com/liammoore99" 
@@ -27,7 +25,6 @@
       <font-awesome-icon :icon="['fab', 'instagram']" size="xl" />
       Instagram
     </a>
-
     <a 
       role="button" 
       href="https://twitch.tv/liama6" 
@@ -37,7 +34,6 @@
       <font-awesome-icon :icon="['fab', 'twitch']" size="xl" />
       Twitch
     </a>
-
   </div>
 </template>
 <script lang="ts">

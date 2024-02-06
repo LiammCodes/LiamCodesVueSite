@@ -166,21 +166,28 @@ export default defineComponent({
         {
           name: "FFmpeg Video Editor", 
           description: "A video editing toolbox with features such as segment, preview, and thumbnail generation.",
-          longDescription: "",
+          longDescription:  "The FFmpeg Video Editor is a program I'm currently in the process of building. It is compilation of " +
+                            "video editing tools including a preview generator, thumbnail generator, video file type converter and " +
+                            "additional rapid-generating tools (to allow for bulk generation processes).",
           imgPath: new URL(`../assets/images/mcSwissPic.png`, import.meta.url).href,
           languages: [
             { name: 'Vue 3', style: 'badge badge-success' },
             { name: 'TypeScript', style: 'badge badge-info' },
           ],
+          urlId: "McSwissVue",
         } as ProjectData,
         {
           name: "Song Request Chat Bot",
           description: "A chat bot for Twitch that allows users to queue songs to a streamers Spotify playlist.",
-          longDescription: "",
+          longDescription:  "A Twitch chat bot built to allow viewers to make song-requests through Twitch chat. It uses both Twitch and " +
+                            "Spotify APIs to allow manipulation of the streamer's Spotify queue. The bot currently only allows for the " +
+                            "addition of new songs to the queue, but also has other features non-related to Spotify, such as regular " +
+                            "commands.",
           imgPath: new URL(`../assets/images/twitchBotPic.png`, import.meta.url).href,
           languages: [
             { name: 'Python', style: 'badge bg-green-500 text-neutral border-none' },
           ],
+          urlId: "liams-twitch-bot",
         } as ProjectData,
       ] as ProjectData[],
       showModal: false as boolean,

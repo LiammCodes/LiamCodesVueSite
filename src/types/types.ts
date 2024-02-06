@@ -9,6 +9,7 @@ export interface ProjectData {
   longDescription: string;
   imgPath: string;
   languages: Language[];
+  urlId: string;
 }
 
 export interface TimePeriodData {
