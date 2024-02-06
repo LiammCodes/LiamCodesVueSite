@@ -5,8 +5,8 @@
         <form method="dialog">
           <button @click="handleModalClose" class="btn btn-sm btn-circle btn-ghost absolute right-0 top-0">✕</button>
         </form>
-        <div class="flex flex-col md:flex-row space-x-6">
-          <div class="flex mt-10 md:mt-0 w-full justify-center items-center">
+        <div class="flex flex-col md:flex-row">
+          <div class="flex flex-col mt-10 md:mt-0 w-full justify-center items-center">
             <kinesis-element :strength="5" class="card-img w-fullmx-auto">
               <img class="object-cover w-full rounded max-w-sm" :src="projectData?.imgPath" alt="Project Thumbnail" style="border-radius: 12px;">
             </kinesis-element>

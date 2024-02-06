@@ -40,7 +40,7 @@
           </div>
           <div class="py-2 text-lg tracking-wider flex items-center">
             <div class="header-bg">
-              <span class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-focus">Liam Moore</span>
+              <span class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-focus">Liam Moore</span>
               <div class="font-bold pl-1">
                 <div>Fullstack Software Developer</div>
                 <div>NS, Canada</div>
