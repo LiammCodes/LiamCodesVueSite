@@ -1,9 +1,9 @@
 <template>
   <dialog ref="projectModal" class="modal" :class="{ 'modal-open': showModal }">
-    <div class="modal-box w-11/12 max-w-5xl">
+    <div class="modal-box w-11/12 max-w-5xl modal-bg">
       <kinesis-container>
         <form method="dialog">
-          <button @click="handleModalClose" class="btn btn-sm btn-circle btn-ghost absolute right-0 top-0">✕</button>
+          <button @click="handleModalClose" class="btn btn-xs text-2xl md:text-sm btn-circle btn-ghost absolute right-0 top-0">✕</button>
         </form>
         <div class="flex flex-col md:flex-row">
           <div class="flex flex-col mt-10 md:mt-0 w-full justify-center items-center">
@@ -80,4 +80,9 @@ export default defineComponent({
 });
 </script>
 <style>
+/* .modal-bg {
+  background: rgba(58,190,247,0.);
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+} */
 </style>
