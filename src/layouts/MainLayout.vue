@@ -18,12 +18,10 @@ import HomeView from '../views/HomeView.vue';
 import AboutView from '../views/AboutView.vue';
 import FooterBar from '../components/FooterBar.vue';
 import ParticleBackground from '../components/ParticleBackground.vue';
-// @ts-ignore
-import { KinesisContainer, KinesisElement } from 'vue-kinesis';
 
 export default defineComponent({
   name: 'MainLayout',
-  components: { AboutView, FooterBar, HomeView, NavBar, KinesisContainer, KinesisElement, ParticleBackground },
+  components: { AboutView, FooterBar, HomeView, NavBar, ParticleBackground },
   setup() {},
   data() {
     return {
