@@ -145,7 +145,7 @@ export default defineComponent({
       this.loadingCsRank = true;
       this.csRankLoadErr = null;
       try {
-        const url = `https://liamcodes.com:6090/${steamID}/premiere-rank`;
+        const url = `https://sp4cenet.ddns.net/${steamID}/premiere-rank`;
         fetch(url, {
           method: 'GET',
           headers: {
@@ -181,7 +181,7 @@ export default defineComponent({
       this.loadingCsWingmanRank = true;
       this.csWingmanRankLoadErr = null;
       try {
-        const url = `https://liamcodes.com:6090/${steamID}/wingman-rank`;
+        const url = `https://sp4cenet.ddns.net/${steamID}/wingman-rank`;
         fetch(url, {
           method: 'GET',
           headers: {
