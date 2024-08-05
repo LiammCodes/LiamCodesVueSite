@@ -100,8 +100,14 @@
               />
             </div>
 
+            <!-- gamer stats -->
+            <div>
+              <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-accent">Game Stats 🎮</p>
+              <GamingStatsCard :theme="theme"/>
+            </div>
+            
             <!-- work experience list -->
-            <div class="space-y-4">
+            <!-- <div class="space-y-4">
               <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-accent">Work Experience 📈</p>
               <time-period-card 
                 v-for="(work, index) in (timePeriods.work as TimePeriodData[])"
@@ -112,10 +118,10 @@
                 :subtitle="work.subtitle"
                 :theme="theme"
               />
-            </div>
+            </div> -->
 
             <!-- education list -->
-            <div class="space-y-4">
+            <!-- <div class="space-y-4">
               <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-secondary">Education 🎓</p>
               <time-period-card 
                 v-for="(education, index) in (timePeriods.education as TimePeriodData[])"
@@ -126,7 +132,7 @@
                 :subtitle="education.subtitle"
                 :theme="theme"
               />
-            </div>
+            </div> -->
 
           </div>
         </div>
@@ -145,11 +151,12 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import ParticleBackground from '../components/ParticleBackground.vue';
 import ProjectCard from '../components/cards/ProjectCard.vue';
 import TimePeriodCard from '../components/cards/TimePeriodCard.vue';
+import GamingStatsCard from '../components/cards/GamingStatsCard.vue';
 import ProjectModal from '../components/modals/ProjectModal.vue';
 
 export default defineComponent({
   name: 'HomeView',
-  components: { BioCard, ParticleBackground, ProjectCard, ProjectModal, TimePeriodCard },
+  components: { BioCard, GamingStatsCard, ParticleBackground, ProjectCard, ProjectModal, TimePeriodCard },
   props: {
     theme: {
       type: String,
