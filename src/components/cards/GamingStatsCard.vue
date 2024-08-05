@@ -16,18 +16,18 @@
                   {{ ratingBig }}<small>{{ ratingSmall }}</small>
                 </span>
               </div>   
-              <div class="text-xs flex justify-center italic text-gray-400">Wins: {{ csRank.current.wins }}</div>      
+              <div class="text-xs flex justify-center italic text-gray-400">Wins: {{ csRankData.premiereRating.current.wins }}</div>      
             </div> 
           </div>
           <div class="flex items-center">
             <div class="cs2logo" style="background-image: url('https://cdn.akamai.steamstatic.com/apps/csgo/images/csgo_react/global/logo_cs_sm.svg')"/>
           </div>
           <div class="rank">
-            <div v-if="loadingCsWingmanRank" class="cs2rating uncommon animate-pulse h-16" style="background-image: url(https://static.csstats.gg/images/ranks/wingman/wingman0.svg)"/>
+            <div v-if="loadingCsRank" class="cs2rating uncommon animate-pulse h-16" style="background-image: url(https://static.csstats.gg/images/ranks/wingman/wingman0.svg)"/>
             <div v-else>
               <div class="text-sm flex justify-center text-gray-400 font-bold">Wingman</div>      
               <div class="cs2rating transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 h-16" :style="ratingWingmanImgStyle"/>
-              <div class="text-xs flex justify-center italic text-gray-400">Wins: {{ csWingmanRank.wins }}</div>      
+              <div class="text-xs flex justify-center italic text-gray-400">Wins: {{ csRankData.wingmanRank.wins }}</div>      
             </div> 
           </div>
         </div>
@@ -45,17 +45,22 @@ import { KinesisContainer, KinesisElement } from 'vue-kinesis';
 interface Rating {
   backgroundImgURL: string;
   elo: string;
-  wins?: string;
+  wins?: string; // wins is optional because it's not present in "best"
 }
 
-interface WingmanRating {
+interface PremiereRating {
+  best: Rating;
+  current: Rating;
+}
+
+interface WingmanRank {
   imgURL: string;
   wins: string;
 }
 
-interface RatingData {
-  best: Rating;
-  current: Rating;
+interface Stats {
+  premiereRating: PremiereRating;
+  wingmanRank: WingmanRank;
 }
 
 export default defineComponent({
@@ -70,11 +75,8 @@ export default defineComponent({
   data() {
     return {
       loadingCsRank: true as boolean,
-      loadingCsWingmanRank: true as boolean,
       csRankLoadErr: null as null | string,
-      csWingmanRankLoadErr: null as null | string,
-      csRank: {} as RatingData,
-      csWingmanRank: {} as WingmanRating,
+      csRankData: {} as Stats,
       rankColors: {
         common: '#B1C3D9',
         uncommon: '#5E98D7',
@@ -87,13 +89,12 @@ export default defineComponent({
     }
   },
   async mounted() {
-    await this.getCsRank('76561198080776335');
-    await this.getWingmanRank('76561198080776335');
+    await this.getCsRankData('76561198080776335');
   },
   computed: {
     ratingTextColor() {
       if (!this.loadingCsRank && !this.csRankLoadErr) {
-        const rating: number = parseFloat((this.csRank.current.elo).replace(/,/g, ''));
+        const rating: number = parseFloat((this.csRankData.premiereRating.current.elo).replace(/,/g, ''));
         if (rating < 5000) {
           return { color: this.rankColors.common };
         } else if (rating < 10000) {
@@ -111,41 +112,41 @@ export default defineComponent({
     },
     ratingImgStyle() {
       if (!this.loadingCsRank && !this.csRankLoadErr) {
-        return {backgroundImage: `url(${this.csRank.current.backgroundImgURL})`};
+        return {backgroundImage: `url(${this.csRankData.premiereRating.current.backgroundImgURL})`};
       }
     },
     ratingWingmanImgStyle() {
-      if (!this.loadingCsWingmanRank && !this.csWingmanRankLoadErr) {
-        return {backgroundImage: `url(${this.csWingmanRank.imgURL})`};
+      if (!this.loadingCsRank && !this.loadingCsRank) {
+        return {backgroundImage: `url(${this.csRankData.wingmanRank.imgURL})`};
       }
     },
     rankImgStyle() {
       if (!this.loadingCsRank && !this.csRankLoadErr) {
-        return {backgroundImage: `url(${this.csRank.current.backgroundImgURL})`};
+        return {backgroundImage: `url(${this.csRankData.premiereRating.current.backgroundImgURL})`};
       }
     },
     ratingBig() {
       if (!this.loadingCsRank && !this.csRankLoadErr) {
-        return this.csRank.current.elo.substring(0, this.csRank.current.elo.indexOf(','))
+        return this.csRankData.premiereRating.current.elo.substring(0, this.csRankData.premiereRating.current.elo.indexOf(','))
       } else {
         return '-- ';
       }
     },
     ratingSmall() {
       if (!this.loadingCsRank && !this.csRankLoadErr) {
-        return this.csRank.current.elo.substring(this.csRank.current.elo.indexOf(','))
+        return this.csRankData.premiereRating.current.elo.substring(this.csRankData.premiereRating.current.elo.indexOf(','))
       } else {
         return '---';
       }
     }
   },
   methods: {
-    async getCsRank(steamID: string) {
+    async getCsRankData(steamID: string) {
       console.log('GETTING RANK')
       this.loadingCsRank = true;
       this.csRankLoadErr = null;
       try {
-        const url = `https://sp4cenet.ddns.net/${steamID}/premiere-rank`;
+        const url = `https://sp4cenet.ddns.net/${steamID}/rank-data`;
         fetch(url, {
           method: 'GET',
           headers: {
@@ -153,7 +154,6 @@ export default defineComponent({
             'Accept': 'application/json',
             'Accept-Encoding': 'gzip, deflate, br'
           },
-          
         }).then(response => {
           // Check if the response is OK (status code in the range 200-299)
           if (!response.ok) {
@@ -164,7 +164,7 @@ export default defineComponent({
         })
         .then(data => {
           // Handle the data from the API
-          this.csRank = data.rating;
+          this.csRankData = data.rating;
           this.loadingCsRank = false;
           console.log(data.rating);
         })
@@ -176,41 +176,6 @@ export default defineComponent({
         this.csRankLoadErr = error.message;
       }
     },
-    async getWingmanRank(steamID: string) {
-      console.log('GETTING RANK')
-      this.loadingCsWingmanRank = true;
-      this.csWingmanRankLoadErr = null;
-      try {
-        const url = `https://sp4cenet.ddns.net/${steamID}/wingman-rank`;
-        fetch(url, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Accept-Encoding': 'gzip, deflate, br'
-          },
-        }).then(response => {
-          // Check if the response is OK (status code in the range 200-299)
-          if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-          }
-          // Parse the JSON data from the response
-          return response.json();
-        })
-        .then(data => {
-          // Handle the data from the API
-          this.csWingmanRank = data.rank;
-          this.loadingCsWingmanRank = false;
-          console.log(data.rank);
-        })
-        .catch(error => {
-          // Handle any errors that occurred during the fetch
-          console.error('There was a problem with the fetch operation:', error);
-        });
-      } catch (error: any) {
-        this.csWingmanRankLoadErr = error.message;
-      }
-    }
   },
 });
 </script>
