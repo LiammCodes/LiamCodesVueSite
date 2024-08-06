@@ -142,7 +142,6 @@ export default defineComponent({
   },
   methods: {
     async getCsRankData(steamID: string) {
-      console.log('GETTING RANK')
       this.loadingCsRank = true;
       this.csRankLoadErr = null;
       try {
@@ -164,9 +163,8 @@ export default defineComponent({
         })
         .then(data => {
           // Handle the data from the API
-          this.csRankData = data.rating;
+          this.csRankData = data;
           this.loadingCsRank = false;
-          console.log(data.rating);
         })
         .catch(error => {
           // Handle any errors that occurred during the fetch
