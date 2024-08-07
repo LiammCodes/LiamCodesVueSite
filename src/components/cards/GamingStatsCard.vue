@@ -12,7 +12,7 @@
             <div v-else>
               <div class="text-sm flex justify-center font-bold">Premiere</div>      
               <div class="cs2rating transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 h-16" :style="ratingImgStyle">
-                <span class="font-fragura" :style="ratingTextColor">
+                <span class="fragura-mods font-fraguapro" :style="ratingTextColor">
                   {{ ratingBig }}<small class="small-rank">{{ ratingSmall }}</small>
                 </span>
               </div>   
@@ -178,7 +178,7 @@ export default defineComponent({
 });
 </script>
 <style lang="scss">
-@import url('/public/assets/fonts/FraguaPro-BoldItalic/style.css');
+// @import url('src/assets/fonts/FraguaPro-BoldItalic/style.css');
 
 .card-bg {
   background: rgba(58,190,247,0);
@@ -212,8 +212,7 @@ export default defineComponent({
   filter: opacity(1);
 }
 
-.font-fragura {
-  font-family: 'Fragua Pro';
+.fragura-mods {
   transform: scaleY(0.95) skew(-3deg);
 }
 

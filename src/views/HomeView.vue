@@ -36,7 +36,7 @@
       <div class="mx-3 md:mx-12">
         <div class="w-full flex justify-center pb-14">
           <div class="pr-5 w-60">
-            <img class="mask mask-circle" size="sm" src="../../public/assets/images/liam.png" alt="Handsome pic of Liam"/>
+            <img class="mask mask-circle" size="sm" src="src/assets/images/liam.png" alt="Handsome pic of Liam"/>
           </div>
           <div class="py-2 text-lg tracking-wider flex items-center">
             <div class="header-bg">
@@ -59,7 +59,7 @@
           <div class="flex flex-col space-y-4 w-full">
             <!-- avatar -->
             <div ref="avatar" class="z-40 pr-5 w-44 xl:w-52">
-              <img class="mask mask-circle" size="sm" src="../../public/assets/images/liam.png" alt="Handsome pic of Liam"/>
+              <img class="mask mask-circle" size="sm" src="src/assets/images/liam.png" alt="Handsome pic of Liam"/>
             </div>
             <div ref="bio" class="w-full">
               <bio-card :theme="theme"/>       
@@ -148,7 +148,7 @@ export default defineComponent({
           longDescription:  "The FFmpeg Video Editor is a program I'm currently in the process of building. It is compilation of " +
                             "video editing tools including a preview generator, thumbnail generator, video file type converter and " +
                             "additional rapid-generating tools (to allow for bulk generation processes).",
-          imgPath: new URL(`../../public/assets/images/mcSwissPic.png`, import.meta.url).href,
+          imgPath: new URL(`../assets/images/mcSwissPic.png`, import.meta.url).href,
           languages: [
             { name: 'Vue 3', style: 'badge badge-success' },
             { name: 'TypeScript', style: 'badge badge-info' },
@@ -162,7 +162,7 @@ export default defineComponent({
                             "Spotify APIs to allow manipulation of the streamer's Spotify queue. The bot currently only allows for the " +
                             "addition of new songs to the queue, but also has other features non-related to Spotify, such as regular " +
                             "commands.",
-          imgPath: new URL(`../../public/assets/images/twitchBotPic.png`, import.meta.url).href,
+          imgPath: new URL(`../assets/images/twitchBotPic.png`, import.meta.url).href,
           languages: [
             { name: 'Python', style: 'badge bg-green-500 text-neutral border-none' },
           ],

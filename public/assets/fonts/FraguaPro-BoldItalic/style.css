@@ -1,9 +1,0 @@
-@font-face {
-    font-family: 'Fragua Pro';
-    src: local('Fragua Pro Bold Italic'), local('Fragua-Pro-Bold-Italic'),
-        url('FraguaPro-BoldItalic.woff2') format('woff2'),
-        url('FraguaPro-BoldItalic.woff') format('woff'),
-        url('FraguaPro-BoldItalic.ttf') format('truetype');
-    font-weight: 700;
-    font-style: italic;
-  }
