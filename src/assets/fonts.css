@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'FraguaPro';
-  src: url('src/assets/fonts/FraguaPro-BoldItalic.woff') format('woff');
+  src: url('assets/fonts/FraguaPro-BoldItalic.woff') format('woff');
   font-weight: bold;
   font-style: italic;
 }
