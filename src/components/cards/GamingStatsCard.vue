@@ -10,24 +10,24 @@
               </span>
             </div> 
             <div v-else>
-              <div class="text-sm flex justify-center text-gray-400 font-bold">Premiere</div>      
+              <div class="text-sm flex justify-center font-bold">Premiere</div>      
               <div class="cs2rating transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 h-16" :style="ratingImgStyle">
-                <span class="italic font-semibold" :style="ratingTextColor">
-                  {{ ratingBig }}<small>{{ ratingSmall }}</small>
+                <span class="font-fragura" :style="ratingTextColor">
+                  {{ ratingBig }}<small class="small-rank">{{ ratingSmall }}</small>
                 </span>
               </div>   
-              <div class="text-xs flex justify-center italic text-gray-400">Wins: {{ csRankData.premiereRating.current.wins }}</div>      
+              <div class="text-xs flex justify-center italic">Wins: {{ csRankData.premiereRating.current.wins }}</div>      
             </div> 
           </div>
           <div class="flex items-center">
-            <div class="cs2logo" style="background-image: url('https://cdn.akamai.steamstatic.com/apps/csgo/images/csgo_react/global/logo_cs_sm.svg')"/>
+            <div class="cs2logo" :class="theme === 'night' ? '' : 'dark-icon'"  style="background-image: url('https://cdn.akamai.steamstatic.com/apps/csgo/images/csgo_react/global/logo_cs_sm.svg')"/>
           </div>
           <div class="rank">
             <div v-if="loadingCsRank" class="cs2rating uncommon animate-pulse h-16" style="background-image: url(https://static.csstats.gg/images/ranks/wingman/wingman0.svg)"/>
             <div v-else>
-              <div class="text-sm flex justify-center text-gray-400 font-bold">Wingman</div>      
+              <div class="text-sm flex justify-center font-bold">Wingman</div>      
               <div class="cs2rating transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 h-16" :style="ratingWingmanImgStyle"/>
-              <div class="text-xs flex justify-center italic text-gray-400">Wins: {{ csRankData.wingmanRank.wins }}</div>      
+              <div class="text-xs flex justify-center italic">Wins: {{ csRankData.wingmanRank.wins }}</div>      
             </div> 
           </div>
         </div>
@@ -198,7 +198,7 @@ export default defineComponent({
 .cs2rating {
   width: 100px;
   display: flex;
-  font-size: 22px;
+  font-size: 25px;
   align-items: center;
   justify-content: center;
   background-repeat: no-repeat;
@@ -206,7 +206,21 @@ export default defineComponent({
   background-size: contain;
   padding: .75rem .75rem .75rem 1.5rem;
   text-shadow: 0 1px 0 black;
-  font-weight: bold;
   margin: auto;
+  filter: opacity(1);
 }
+
+.font-fragura {
+  font-family: 'FraguaPro';
+  transform: scaleY(0.95) skew(-3deg);
+}
+
+.small-rank {
+  font-size: 18px;
+}
+
+.dark-icon {
+  filter: invert(1) grayscale(1) contrast(1) brightness(0);
+}
+
 </style>

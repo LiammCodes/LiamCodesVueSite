@@ -2,8 +2,13 @@
 export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}",],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'Fragua': ["FraguaPro", "sans-serif"],
+      },
+    },
   },
+  
   plugins: [require("daisyui"), require("@tailwindcss/typography")],
   daisyui: {
     themes: [
