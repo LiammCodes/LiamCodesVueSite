@@ -105,7 +105,6 @@
               <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-accent">Game Stats 🎮</p>
               <GamingStatsCard :theme="theme"/>
             </div>
-
           </div>
         </div>
       </div>

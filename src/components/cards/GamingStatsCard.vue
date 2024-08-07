@@ -4,18 +4,16 @@
       <div class="leading-normal w-full">
         <div class="flex justify-evenly pt-1">
           <div class="rank">
-            <div v-if="loadingCsRank" class="cs2rating uncommon animate-pulse h-16" style="background-image: url(https://static.csstats.gg/images/ranks/cs2/rating.common.png)">
-              <span class="italic font-semibold" :style="ratingTextColor">
-                {{ ratingBig }}<small>{{ ratingSmall }}</small>
-              </span>
-            </div> 
+            <div v-if="loadingCsRank" class="flex items-center justify-center transition ease-in-out animate-pulse hover:-translate-y-1 hover:scale-110 duration-300 h-16">
+              <PremiereRating loading/>
+            </div>  
+
             <div v-else>
               <div class="text-sm flex justify-center font-bold">Premiere</div>      
-              <div class="cs2rating transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 h-16" :style="ratingImgStyle">
-                <span class="fragura-mods font-fraguapro" :style="ratingTextColor">
-                  {{ ratingBig }}<small class="small-rank">{{ ratingSmall }}</small>
-                </span>
+              <div class="flex items-center justify-center transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 h-16">
+                <PremiereRating :rating="csRankData.premiereRating.current.elo"/>
               </div>   
+
               <div class="text-xs flex justify-center italic">Wins: {{ csRankData.premiereRating.current.wins }}</div>      
             </div> 
           </div>
@@ -23,10 +21,10 @@
             <div class="cs2logo" :class="theme === 'night' ? '' : 'dark-icon'"  style="background-image: url('https://cdn.akamai.steamstatic.com/apps/csgo/images/csgo_react/global/logo_cs_sm.svg')"/>
           </div>
           <div class="rank">
-            <div v-if="loadingCsRank" class="cs2rating uncommon animate-pulse h-16" style="background-image: url(https://static.csstats.gg/images/ranks/wingman/wingman0.svg)"/>
+            <div v-if="loadingCsRank" class="cs2rating animate-pulse h-16" style="background-image: url(https://static.csstats.gg/images/ranks/wingman/wingman0.svg)"/>
             <div v-else>
               <div class="text-sm flex justify-center font-bold">Wingman</div>      
-              <div class="cs2rating transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 h-16" :style="ratingWingmanImgStyle"/>
+              <div class="cs2rating transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300 h-16 image-with-shadow" :style="ratingWingmanImgStyle"/>
               <div class="text-xs flex justify-center italic">Wins: {{ csRankData.wingmanRank.wins }}</div>      
             </div> 
           </div>
@@ -41,6 +39,7 @@ import { defineComponent } from 'vue';
 import { CalendarDaysIcon } from '@heroicons/vue/20/solid';
 // @ts-ignore
 import { KinesisContainer, KinesisElement } from 'vue-kinesis';
+import PremiereRating from '../PremiereRating.vue';
 
 interface Rating {
   backgroundImgURL: string;
@@ -71,7 +70,7 @@ export default defineComponent({
       required: true,
     }
   },
-  components: { CalendarDaysIcon, KinesisContainer, KinesisElement },
+  components: { CalendarDaysIcon, KinesisContainer, KinesisElement, PremiereRating },
   data() {
     return {
       loadingCsRank: true as boolean,
@@ -222,6 +221,13 @@ export default defineComponent({
 
 .dark-icon {
   filter: invert(1) grayscale(1) contrast(1) brightness(0);
+}
+
+.image-with-shadow {
+  -webkit-filter: drop-shadow(1px 1px 0 black)
+                  drop-shadow(-1px -1px 0 black);
+  filter: drop-shadow(1px 1px 1px rgba(0, 31, 84, 0.8)) 
+          drop-shadow(-1px 2px 1px rgba(15, 0, 110, 0.8));
 }
 
 </style>

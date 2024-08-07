@@ -72,7 +72,6 @@
         const html = document.getElementById('html')
         const lightTheme = 'winter' as string;
         const darkTheme = 'night' as string;
-        console.log(html)
         if (this.darkMode) {
           if (html) {
             html.style.backgroundColor = '#FFFFFF';
