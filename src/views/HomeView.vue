@@ -105,34 +105,6 @@
               <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-accent">Game Stats 🎮</p>
               <GamingStatsCard :theme="theme"/>
             </div>
-            
-            <!-- work experience list -->
-            <!-- <div class="space-y-4">
-              <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-accent">Work Experience 📈</p>
-              <time-period-card 
-                v-for="(work, index) in (timePeriods.work as TimePeriodData[])"
-                :key="index"
-                class="col-span-1"
-                :title="work.title" 
-                :dateRange="work.dateRange" 
-                :subtitle="work.subtitle"
-                :theme="theme"
-              />
-            </div> -->
-
-            <!-- education list -->
-            <!-- <div class="space-y-4">
-              <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-secondary">Education 🎓</p>
-              <time-period-card 
-                v-for="(education, index) in (timePeriods.education as TimePeriodData[])"
-                :key="index"
-                class="col-span-1"
-                :title="education.title" 
-                :dateRange="education.dateRange" 
-                :subtitle="education.subtitle"
-                :theme="theme"
-              />
-            </div> -->
 
           </div>
         </div>

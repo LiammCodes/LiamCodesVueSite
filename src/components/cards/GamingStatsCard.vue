@@ -145,7 +145,7 @@ export default defineComponent({
       this.loadingCsRank = true;
       this.csRankLoadErr = null;
       try {
-        const url = `https://sp4cenet.ddns.net/${steamID}/rank-data`;
+        const url = `https://sp4cenet.ddns.net/cs2/rank-data/${steamID}`;
         fetch(url, {
           method: 'GET',
           headers: {
