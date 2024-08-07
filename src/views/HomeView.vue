@@ -36,7 +36,7 @@
       <div class="mx-3 md:mx-12">
         <div class="w-full flex justify-center pb-14">
           <div class="pr-5 w-60">
-            <img class="mask mask-circle" size="sm" src="../../assets/images/liam.png" alt="Handsome pic of Liam"/>
+            <img class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
           </div>
           <div class="py-2 text-lg tracking-wider flex items-center">
             <div class="header-bg">
@@ -59,7 +59,7 @@
           <div class="flex flex-col space-y-4 w-full">
             <!-- avatar -->
             <div ref="avatar" class="z-40 pr-5 w-44 xl:w-52">
-              <img class="mask mask-circle" size="sm" src="../../assets/images/liam.png" alt="Handsome pic of Liam"/>
+              <img class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
             </div>
             <div ref="bio" class="w-full">
               <bio-card :theme="theme"/>       
