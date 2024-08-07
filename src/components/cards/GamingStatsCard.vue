@@ -211,7 +211,7 @@ export default defineComponent({
 }
 
 .font-fragura {
-  font-family: 'FraguaPro';
+  font-family: 'Fragua Pro';
   transform: scaleY(0.95) skew(-3deg);
 }
 
