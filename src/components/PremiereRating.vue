@@ -5,7 +5,7 @@
   </svg>
   <div class="cs-rating flex items-center justify-center font-fraguapro" :class="ratingClass">
     <span class="px-3 text-2xl no-skew">
-      {{ ratingBig }}<small>{{ ratingSmall }}</small>
+      {{ ratingBig }}<small class="tracking-wider">{{ ratingSmall }}</small>
     </span>
   </div>
 </div>
