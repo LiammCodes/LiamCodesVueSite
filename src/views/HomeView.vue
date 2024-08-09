@@ -7,7 +7,7 @@
         <particle-background :is-mobile="isMobile"/>
         
         <!-- hide on mobile to avoid animation weirdness -->
-        <div v-if="!isMobile" class="h-screen flex items-center justify-center max-w-7xl mx-auto" ref="content">
+        <div v-if="!isMobile" class="h-screen flex items-center justify-center max-w-7xl mx-auto">
           <div ref="headerDiv" class="text-4xl md:text-5xl header-bg">
             <div ref="hi">
               <span class="font-extrabold py-1 tracking-wider">Hi! 👋</span>
@@ -202,26 +202,30 @@ export default defineComponent({
   },
   mounted() {
     window.addEventListener("resize", this.updateWindowSize);
-    // fade header in on load
-    gsap.from(this.$refs.headerDiv as any, { 
-      delay: 0.5,
-      duration: 1,
-      autoAlpha: 0,
-      ease: "black.out(1.7)"
-    });
 
-    // fade header out on scroll
-    this.headerFade(this.$refs.hi as HTMLElement);
-    this.headerFade(this.$refs.title as HTMLElement);
-    this.headerFade(this.$refs.im as HTMLElement);
+    if (!this.isMobile) {
+      // fade header in on load
+      gsap.from(this.$refs.headerDiv as any, { 
+        delay: 0.5,
+        duration: 1,
+        autoAlpha: 0,
+        ease: "black.out(1.7)"
+      });
 
-    // fade bio in on scroll
-    this.bioFade(this.$refs.bio as HTMLElement);
-    this.bioFade(this.$refs.avatar as HTMLElement);
-    this.bioFade(this.$refs.subName as HTMLElement);
+      // fade header out on scroll
+      this.headerFade(this.$refs.hi as HTMLElement);
+      this.headerFade(this.$refs.title as HTMLElement);
+      this.headerFade(this.$refs.im as HTMLElement);
 
-    // slide name on scroll
-    this.slideToAvatar();
+      // fade bio in on scroll
+      this.bioFade(this.$refs.bio as HTMLElement);
+      this.bioFade(this.$refs.avatar as HTMLElement);
+      this.bioFade(this.$refs.subName as HTMLElement);
+
+      // slide name on scroll
+      this.slideToAvatar();
+    }
+    
   },
 
   computed: {
@@ -268,37 +272,6 @@ export default defineComponent({
         duration: 0.5,
         autoAlpha: 0,
         ease: "black.out(1.7)"
-      });
-    },
-
-    scrollFade(ref: HTMLElement) {
-      gsap.to(ref, {
-        scrollTrigger: {
-          trigger: ref, // Set the trigger to the target element
-          start: 'top center', // Adjust as needed
-          end: 'bottom center', // Adjust as needed
-          toggleActions: 'restart none restart none',
-          onEnter: () => {
-            // Fade in animation
-            gsap.to(ref, {
-              duration: 0.5,
-              autoAlpha: 1,
-              ease: 'power2.out',
-            });
-          },
-          onLeave: () => {
-            // Fade out animation
-            gsap.to(ref, {
-              duration: 0.5,
-              autoAlpha: 0,
-              ease: 'power2.in',
-            });
-          },
-        },
-        autoAlpha: 0,
-        delay: 0,
-        duration: 0.5,
-        ease: 'power2.out',
       });
     },
 
