@@ -1,7 +1,6 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import './index.css';
-// import './assets/fonts.css' // Import the font CSS here
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faInstagram, faTwitch, faGithub } from '@fortawesome/free-brands-svg-icons';

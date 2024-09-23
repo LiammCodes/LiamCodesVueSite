@@ -3,8 +3,8 @@
   <svg viewBox="0 0 17 32" class="vertical-lines" :style="{ fill: svgFillColor }">
     <path d="M5.44 2.13A2.6 2.6 0 0 1 7.99 0h1.86a.6.6 0 0 1 .6.7L4.83 31.5a.6.6 0 0 1-.6.5h-2.3c-1 0-1.76-.9-1.58-1.89l5.1-27.98ZM11.82.99c.1-.57.6-.99 1.18-.99h2.93a.6.6 0 0 1 .59.7l-5.4 30.31c-.1.57-.6.99-1.18.99H7a.6.6 0 0 1-.59-.7L11.82.98Z"></path>
   </svg>
-  <div class="cs-rating flex items-center justify-center font-fraguapro" :class="ratingClass">
-    <span class="px-3 text-2xl no-skew">
+  <div class="cs-rating flex items-center justify-center font-bold" :class="ratingClass">
+    <span class="px-3 text-2xl italic no-skew">
       {{ ratingBig }}<small class="tracking-wider">{{ ratingSmall }}</small>
     </span>
   </div>
@@ -110,7 +110,7 @@ export default defineComponent({
 }
 
 .no-skew {
-  transform: skew(+5deg);
+  transform: skew(+7deg);
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5); /* Add text shadow */
 }
 
