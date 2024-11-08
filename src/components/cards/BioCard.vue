@@ -50,7 +50,7 @@
       Last.fm
     </a>
     <a 
-      href="https://https://letterboxd.com/liama6/" 
+      href="https://letterboxd.com/liama6/" 
       target="_blank" 
       class="btn btn-outline bio-card-bg bg-opacity-10 grow mb-4 text-cyan-600 bg-cyan-600 hover:bg-cyan-500 hover:border-cyan-600"
       :class="bioVisible ? '' : 'pointer-events-none'"
