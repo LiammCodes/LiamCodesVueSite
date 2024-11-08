@@ -15,13 +15,12 @@
 import { defineComponent } from 'vue';
 import NavBar from '../components/NavBar.vue';
 import HomeView from '../views/HomeView.vue';
-import AboutView from '../views/AboutView.vue';
 import FooterBar from '../components/FooterBar.vue';
 import ParticleBackground from '../components/ParticleBackground.vue';
 
 export default defineComponent({
   name: 'MainLayout',
-  components: { AboutView, FooterBar, HomeView, NavBar, ParticleBackground },
+  components: { FooterBar, HomeView, NavBar, ParticleBackground },
   setup() {},
   data() {
     return {
@@ -49,4 +48,15 @@ export default defineComponent({
   height: 100%;
   /* Add other styling as needed */
 }
+
+/* Hides scrollbar but allows scrolling */
+body {
+  overflow: scroll;
+}
+
+/* For WebKit browsers */
+body::-webkit-scrollbar {
+  display: none;
+}
+
 </style>

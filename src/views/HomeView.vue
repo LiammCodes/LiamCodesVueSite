@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full outline-none" tabindex="0" @keydown.esc="handleModalClose">
+  <div class="w-full outline-none" @keydown.esc="handleModalClose">
     <!-- fixed div for hero and particle bg -->
     <div class="w-full fixed">
       <div class="mx-6 md:mx-24">
@@ -62,7 +62,7 @@
               <img class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
             </div>
             <div ref="bio" class="w-full">
-              <bio-card :theme="theme"/>       
+              <bio-card :theme="theme" :bio-opacity="+bioOpacity"/>       
             </div>
           </div>
         </div>
@@ -139,6 +139,7 @@ export default defineComponent({
   },
   data() {
     return {
+      bioOpacity: 0 as number | string,
       modalData: null as null | ProjectData,
       projects: [
         {
@@ -198,7 +199,7 @@ export default defineComponent({
       if (oldVal < 1024 && newVal >= 1024 || oldVal >= 1024 && newVal < 1024){
         location.reload()
       }
-    }
+    },
   },
   mounted() {
     window.addEventListener("resize", this.updateWindowSize);
@@ -231,7 +232,7 @@ export default defineComponent({
   computed: {
     isMobile(): boolean {
       return this.windowWidth < 1024;
-    }
+    },
   },
 
   methods: {
@@ -243,6 +244,9 @@ export default defineComponent({
           toggleActions: "restart none reverse reverse",
           scrub: true,
           invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            this.bioOpacity = self.progress.toFixed(3);
+          }
         },
       })
       animation.from(ref as HTMLElement, {
@@ -322,4 +326,14 @@ export default defineComponent({
   background-color:rgba(0, 0, 0, 0);
   backdrop-filter: blur(0);
 }
+
+img {
+  pointer-events: none;
+  user-select: none;   /* Prevents text selection */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none;    /* For Firefox */
+  -ms-user-select: none;     /* For Internet Explorer/Edge */
+}
+
+
 </style>
