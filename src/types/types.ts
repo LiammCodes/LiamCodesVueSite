@@ -9,7 +9,8 @@ export interface ProjectData {
   longDescription: string;
   imgPath: string;
   languages: Language[];
-  urlId: string;
+  githubUrlId: string;
+  demoUrl: string;
 }
 
 export interface TimePeriodData {

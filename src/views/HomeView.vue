@@ -4,7 +4,7 @@
     <div class="w-full fixed">
       <div class="mx-6 md:mx-24">
         
-        <particle-background :is-mobile="isMobile"/>
+        <ParticleBackground :is-mobile="isMobile"/>
         
         <!-- hide on mobile to avoid animation weirdness -->
         <div v-if="!isMobile" class="h-screen flex items-center justify-center max-w-7xl mx-auto">
@@ -48,7 +48,7 @@
             </div>
           </div>
         </div>
-        <bio-card :theme="theme"/>
+        <BioCard :theme="theme"/>
       </div>
     </div>
 
@@ -62,7 +62,7 @@
               <img class="mask mask-circle" size="sm" src="../assets/images/liam.png" alt="Handsome pic of Liam"/>
             </div>
             <div ref="bio" class="w-full">
-              <bio-card :theme="theme" :bio-opacity="+bioOpacity"/>       
+              <BioCard :theme="theme" :bio-opacity="+bioOpacity"/>       
             </div>
           </div>
         </div>
@@ -71,11 +71,11 @@
     </div>
 
     <!-- project modal -->
-    <project-modal :show-modal="showModal" @modal-closed="showModal = false" :project-data="modalData">
+    <ProjectModal :show-modal="showModal" @modal-closed="showModal = false" :project-data="modalData" :theme="theme">
       <template v-slot:imgSlot>
         <img class="object-cover w-full h-full rounded max-w-sm" :src="projects[0].imgPath" alt="Project Thumbnail">
       </template>
-    </project-modal>  
+    </ProjectModal>  
 
     <!-- CONTENT -->
     <div class="max-w-7xl mx-auto">
@@ -90,7 +90,7 @@
             <!-- project list -->
             <div class="space-y-4">
               <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40" ref="projectsTitle">Projects 💻</p>
-              <project-card
+              <ProjectCard
                 v-for="(project, index) in projects"
                 :key="index"
                 class="col-span-1"
@@ -153,7 +153,8 @@ export default defineComponent({
             { name: 'Vue 3', style: 'badge badge-success' },
             { name: 'TypeScript', style: 'badge badge-info' },
           ],
-          urlId: "McSwissVue",
+          url: "",
+          githubUrlId: "McSwissVue",
         } as ProjectData,
         {
           name: "Song Request Chat Bot",
@@ -166,7 +167,22 @@ export default defineComponent({
           languages: [
             { name: 'Python', style: 'badge bg-green-500 text-neutral border-none' },
           ],
-          urlId: "liams-twitch-bot",
+          url: "",
+          githubUrlId: "liams-twitch-bot",
+        } as ProjectData,
+        {
+          name: "RyJewers Website",
+          description: "A website and CMS built for fitness content creator RyJewers.",
+          longDescription:  "A website and CMS built for Ryjewers, a fitness content creator hosting his social links, programs and services. " +
+                            "The website also features a custom CMS for service and program management, allowing the admin to modify product details." +
+                            "The site was built with HTML, TailwindCSS, Java Script, PHP, and uses a MySQL database.",
+          imgPath: new URL(`../assets/images/rjJewersPic.png`, import.meta.url).href,
+          languages: [
+            { name: 'Java Script', style: 'badge bg-orange-500 text-neutral border-none' },
+            { name: 'PHP', style: 'badge bg-indigo-500 text-neutral border-none' },
+          ],
+          demoUrl: "https://www.ryjewers.com",
+          githubUrlId: "",
         } as ProjectData,
       ] as ProjectData[],
       showModal: false as boolean,
@@ -317,10 +333,6 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-.card-bg {
-  background: rgba(58,190,247,0);
-  backdrop-filter: blur(10px);
-}
 
 .header-bg {
   background-color:rgba(0, 0, 0, 0);
