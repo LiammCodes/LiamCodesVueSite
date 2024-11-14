@@ -42,7 +42,7 @@
               <a 
                 :href="`${projectData.demoUrl}`" 
                 target="_blank" 
-                class="btn btn-outline bio-card-bg bg-opacity-10 grow mb-4 text-indigo-600 bg-indigo-600 hover:bg-indigo-500 hover:border-indigo-600"    
+                class="btn btn-outline bio-card-bg bg-opacity-10 grow mb-4 text-green-600 bg-green-600 hover:bg-green-500 hover:border-green-600"    
               >
                 Live Demo
               </a>
