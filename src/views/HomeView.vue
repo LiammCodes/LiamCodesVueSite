@@ -104,6 +104,9 @@
             <div>
               <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-accent">Game Stats 🎮</p>
               <GamingStatsCard :theme="theme"/>
+              <div class="flex justify-center py-3">
+                <OsrsStatsCard/>
+              </div>
             </div>
           </div>
         </div>
@@ -124,10 +127,11 @@ import ProjectCard from '../components/cards/ProjectCard.vue';
 import TimePeriodCard from '../components/cards/TimePeriodCard.vue';
 import GamingStatsCard from '../components/cards/GamingStatsCard.vue';
 import ProjectModal from '../components/modals/ProjectModal.vue';
+import OsrsStatsCard from '../components/cards/OsrsStatsCard.vue';
 
 export default defineComponent({
   name: 'HomeView',
-  components: { BioCard, GamingStatsCard, ParticleBackground, ProjectCard, ProjectModal, TimePeriodCard },
+  components: { BioCard, GamingStatsCard, OsrsStatsCard, ParticleBackground, ProjectCard, ProjectModal, TimePeriodCard },
   props: {
     theme: {
       type: String,
@@ -346,6 +350,4 @@ img {
   -moz-user-select: none;    /* For Firefox */
   -ms-user-select: none;     /* For Internet Explorer/Edge */
 }
-
-
 </style>

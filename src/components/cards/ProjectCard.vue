@@ -12,10 +12,10 @@
       ref="container"
     >
       <!-- Existing content -->
-      <kinesis-element :strength="5" class="w-2/5">
+      <kinesis-element :strength="5" class="w-full md:w-2/5">
         <img class="object-cover w-full h-full rounded max-w-sm" :src="projectData.imgPath" alt="Project Thumbnail">
       </kinesis-element>
-      <div class="flex flex-col content-between leading-normal w-3/5">
+      <div class="flex flex-col content-between leading-normal w-full md:w-3/5">
       
         <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ projectData.name }}</h5>
         <p class="mb-2 font-normal leading-tight">{{ projectData.description }}</p>
