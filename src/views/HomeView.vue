@@ -104,7 +104,9 @@
             <div>
               <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-accent">Game Stats 🎮</p>
               <GamingStatsCard :theme="theme"/>
-              <OsrsStatsCard/>
+              <div class="flex justify-center py-3">
+                <OsrsStatsCard/>
+              </div>
             </div>
           </div>
         </div>
@@ -348,6 +350,4 @@ img {
   -moz-user-select: none;    /* For Firefox */
   -ms-user-select: none;     /* For Internet Explorer/Edge */
 }
-
-
 </style>
