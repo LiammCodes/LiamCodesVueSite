@@ -177,7 +177,6 @@ export default defineComponent({
 });
 </script>
 <style lang="scss">
-// @import url('src/assets/fonts/FraguaPro-BoldItalic/style.css');
 
 .card-bg {
   background: rgba(58,190,247,0);

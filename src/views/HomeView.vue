@@ -351,6 +351,4 @@ img {
   -moz-user-select: none;    /* For Firefox */
   -ms-user-select: none;     /* For Internet Explorer/Edge */
 }
-
-
 </style>
