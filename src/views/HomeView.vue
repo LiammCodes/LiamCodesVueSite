@@ -218,9 +218,6 @@ export default defineComponent({
         location.reload()
       }
     },
-    bioOpacity(oldVal: any, newVal: any){
-      console.log(newVal)
-    }
   },
   mounted() {
     window.addEventListener("resize", this.updateWindowSize);
