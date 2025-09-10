@@ -101,13 +101,13 @@
             </div>
 
             <!-- gamer stats -->
-            <div>
+            <!-- <div class="space-y-4">
               <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-accent">Game Stats 🎮</p>
               <GamingStatsCard :theme="theme"/>
-              <!-- <div class="flex justify-center py-3">
+              <div class="flex justify-center py-3">
                 <OsrsStatsCard/>
-              </div> -->
-            </div>
+              </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -125,7 +125,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import ParticleBackground from '../components/ParticleBackground.vue';
 import ProjectCard from '../components/cards/ProjectCard.vue';
 import TimePeriodCard from '../components/cards/TimePeriodCard.vue';
-import GamingStatsCard from '../components/cards/GamingStatsCard.vue';
+import GamingStatsCard from '../components/cards/CsStatsCard.vue';
 import ProjectModal from '../components/modals/ProjectModal.vue';
 import OsrsStatsCard from '../components/cards/OsrsStatsCard.vue';
 
