@@ -160,8 +160,7 @@ export default defineComponent({
   z-index: 1;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: source-out;
+
   padding: 0.1rem;
 }
 </style>
