@@ -104,7 +104,9 @@
             <!-- <div class="space-y-4">
               <p class="header-bg font-extrabold text-3xl md:text-5xl py-4 pl-2 tracking-wider z-40 text-accent">Game Stats 🎮</p>
               <GamingStatsCard :theme="theme"/>
-              <OsrsStatsCard :theme="theme"/>
+              <div class="flex justify-center py-3">
+                <OsrsStatsCard/>
+              </div>
             </div> -->
           </div>
         </div>
